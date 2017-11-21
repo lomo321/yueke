@@ -10,6 +10,7 @@ var webserver = require('gulp-webserver');
 var clean = require('gulp-clean');
 var babel = require("gulp-babel");
 var es2015 = require("babel-preset-es2015");
+var uglify = require('gulp-uglify');
 gulp.task('webpack', function() {
     return gulp.src(['src/app.js','src/index.js'])
         .pipe(named())
@@ -24,15 +25,18 @@ gulp.task('webpack', function() {
             //watch: true
         }))
         .pipe(babel({presets:[es2015]}))
-        .pipe(gulp.dest('dist/'));
+        .pipe(gulp.dest('dist/'))
+        .pipe(uglify())
+        .pipe(gulp.dest('release'))
 });
 
 
 gulp.task('less', function () {
-    gulp.src(['src/less/index.less','src/less/edit.less'])
+    gulp.src(['src/less/edit.less'])
         .pipe(less())
-        //.pipe(cssmin())
-        .pipe(gulp.dest('dist/css'));
+        .pipe(gulp.dest('dist/css'))
+        .pipe(cssmin())
+        .pipe(gulp.dest('release'))
 });
 
 gulp.task('webserver', function() {
@@ -41,7 +45,8 @@ gulp.task('webserver', function() {
             livereload: false,
             directoryListing: false,
             open: true,
-            port:8080
+            port:8080,
+            open:'http://localhost:8080/homework/schoolworkEdit.html#/edit'
         }));
 });
 
