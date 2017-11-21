@@ -12,7 +12,8 @@ module.exports = {
             display: '',
             basic: false,
             strenthen: false,
-            improve: false
+            improve: false,
+            selectionNums:7
         }
     },
     props: ['orderBy', 'isShowMarks'],
@@ -21,8 +22,7 @@ module.exports = {
         this.updateShow();
     },
     updated(){
-        //console.log('update!!')
-        //this.updateShow();
+
     },
     methods: {
         updateShow: function () {
@@ -33,16 +33,6 @@ module.exports = {
             } else {
                 this.display = 'none'
             }
-            //this.basic = false;
-            //this.strenthen = false;
-            //this.improve = false;
-            //if (difficulty == 0.8) {
-            //    this.basic = true
-            //} else if(difficulty == 0.5){
-            //    this.strenthen = true
-            //} else if(difficulty == 0.3) {
-            //    this.improve  = true
-            //}
         },
         typeChange: function () {
             //console.log(this.orderBy, 'change')
@@ -146,6 +136,20 @@ module.exports = {
         editingStem(){
             return $.extend({}, this.$store.state.qListForRender[this.orderBy - 1])
         },
+        selectionArr(){
+            var arr = {};
+
+            if(this.selectionNums){
+                arr['0'] = '选项个数';
+                var i = 2;
+                while (i<=this.selectionNums) {
+                    arr[i] = i;
+                    i++
+                }
+
+            }
+            return arr;
+        }
     },
     watch: {}
 };

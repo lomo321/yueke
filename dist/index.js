@@ -50,405 +50,19 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 /* 0 */
 /***/function (module, exports, __webpack_require__) {
 
-	module.exports = __webpack_require__(6);
-
-	/***/
-},,,,,
-/* 1 */
-/* 2 */
-/* 3 */
-/* 4 */
-/* 5 */
-/***/function (module, exports) {
-
-	/**
-  * Created by lomo on 2017/10/7.
-  */
-	var hostSetting = window.hostSetting || 'http://211.159.185.181:8080';
-	module.exports = {
-		getSchoolWork: function getSchoolWork(id) {
-			var defer = $.Deferred();
-			var data = {
-				'schoolworkId': id || '1'
-			};
-			$.ajax({
-				url: hostSetting + '/schoolwork/getSchoolwork?ajax=true',
-				data: JSON.stringify(data),
-				type: 'POST',
-				contentType: 'application/json;charset=utf-8 ',
-				processData: false,
-				success: function success(result) {
-
-					/**
-      *
-      id,      ‘编号’
-      name,            ‘作业名’
-      grade,      '年级一~九年级分别是01~09? 高一~高三是10,11,12 ',
-      subject,    '科目：00-未知, YW-语文,SX-数学,YY-英语,WL-物理,HX-化学,SW-生物,DL-地理,ZZ-政治,LS-历史,JK-健康,KX-科学,XX-信息,TY-体育, MU-音乐,MS-美术,SF-书法,SP-思想品德,WZ-文科综合,LZ-理科综合'
-      columes,     '栏目数，1 一栏，2两栏，3三栏'
-      jinzhizuodaqu,     '设置禁止作答区: 1是，0否'
-      useRang,           '使用范围: 1 个人使用，2 校内共享'
-      cardFormat,          '答题方式：1 卷卡合一，2答题卡，3题卡分离'
-      status,               '状态 1 草稿，2 已发布，3已禁用'
-      pdfPath,             'pdf路径'
-      bookId ,             '关联的教辅书id'
-      schoolId ,            '学校id'
-      description ,          '介绍'
-      createName ,         '建立人姓名'
-      createBy ,            '建立人id'
-      createDate ,          '收录时间'
-      updateBy,            '最后修改人'
-      updateDate,          '最后修改时间'
-      * **/
-					defer.resolve(result);
-				},
-				fail: function fail(data) {
-					defer.reject(data);
-				}
-			});
-			return defer;
-		},
-		getErrorQuestion: function getErrorQuestion(id) {
-			var defer = $.Deferred();
-			var data = {
-				'schoolworkId': id || '1'
-			};
-			$.ajax({
-				url: hostSetting + '/schoolwork/getErrorSchoolwork?ajax=true',
-				data: JSON.stringify(data),
-				type: 'POST',
-				contentType: 'application/json;charset=utf-8 ',
-				processData: false,
-				success: function success(result) {
-					defer.resolve(result);
-				},
-				fail: function fail(data) {
-					defer.reject(data);
-				}
-			});
-			return defer;
-		},
-		getAllQuestion: function getAllQuestion(id) {
-			var defer = $.Deferred();
-			var data = {
-				'schoolworkId': id || '1'
-			};
-			$.ajax({
-				url: hostSetting + '/schoolwork/getNormalQuestion?ajax=true',
-				data: JSON.stringify(data),
-				type: 'POST',
-				contentType: 'application/json;charset=utf-8 ',
-				processData: false,
-				success: function success(result) {
-					defer.resolve(result);
-				},
-				fail: function fail(data) {
-					defer.reject(data);
-				}
-			});
-			return defer;
-		},
-
-		getQuestion: function getQuestion(params) {
-			var defer = $.Deferred();
-			var data = {
-				'schoolworkId': params.id || '1', //作业本id
-				'questionId': params.qId || '' //题目id
-			};
-			$.ajax({
-				url: hostSetting + '/schoolwork/getQuestionDetails?ajax=true',
-				data: JSON.stringify(data),
-				type: 'POST',
-				contentType: 'application/json;charset=utf-8 ',
-				processData: false,
-				success: function success(result) {
-					defer.resolve(result);
-				},
-				fail: function fail(data) {
-					defer.reject(data);
-				}
-			});
-			return defer;
-		},
-		modifyQuestion: function modifyQuestion(params) {
-			var defer = $.Deferred();
-			var data = {
-				'schoolworkId': params.schoolworkId || '1', //作业本id
-				'questionId': params.questionId || '', //题目id
-				"orderBy": params.orderBy, //题目序号
-				"stem": params.stem, //题干
-				"shareStem": params.shareStem || '',
-				"score": params.score, //分数
-				"qtypeInner": params.qtypeInner, //录入题型（内部题型）：单选1，多选2，简答 4
-				"answerCount": params.answerCount, //答案数
-				"answer": params.answer, //答案，用逗号','分割
-				"difficulty": params.difficulty, //难度
-				"knpList": params.knpList, //知识点，用逗号','分割
-				"height": params.height || 100
-
-			};
-			$.ajax({
-				url: hostSetting + '/schoolwork/modify?ajax=true',
-				data: JSON.stringify(params),
-				type: 'POST',
-				contentType: 'application/json;charset=utf-8 ',
-				processData: false,
-				success: function success(result) {
-					defer.resolve(result);
-				},
-				fail: function fail(data) {
-					defer.reject(data);
-				}
-			});
-			return defer;
-		},
-		delQuestion: function delQuestion(params) {
-			var defer = $.Deferred();
-			var data = {
-				'schoolworkId': params.schoolworkId || '1', //作业本id
-				'questionId': params.questionId || '' //题目id
-			};
-			$.ajax({
-				url: hostSetting + '/schoolwork/delQuestion?ajax=true',
-				data: JSON.stringify(data),
-				type: 'POST',
-				contentType: 'application/json;charset=utf-8 ',
-				processData: false,
-				success: function success(result) {
-					defer.resolve(result);
-				},
-				fail: function fail(data) {
-					defer.reject(data);
-				}
-			});
-			return defer;
-		},
-		udQuestion: function udQuestion(params) {
-			var defer = $.Deferred();
-			/**
-    * questionList:[
-    {
-        questionId:题目id,
-        scope:分数,
-        orderBy:排序
-    }
-    ]
-    * **/
-			var data = {
-				'schoolworkId': params.id || '1', //作业本id
-				'questionList': params.questionList
-			};
-			$.ajax({
-				url: hostSetting + '/schoolwork/updateSchoolworkQuestion?ajax=true',
-				data: JSON.stringify(data),
-				type: 'POST',
-				contentType: 'application/json;charset=utf-8 ',
-				processData: false,
-				success: function success(result) {
-					defer.resolve(result);
-				},
-				fail: function fail(data) {
-					console.log('~~~~~');
-					defer.reject();
-				}
-			});
-			return defer;
-		},
-		addQuestion: function addQuestion(params) {
-			var defer = $.Deferred();
-			var data = {
-				'schoolworkId': params.schoolworkId || '1', //作业本id
-				"orderBy": params.orderBy, //题目序号
-				"endOrderBy": params.endOrderBy,
-				"qtypeInner": params.qtypeInner, //录入题型（内部题型）：单选1，多选2，简答 4
-				"answerCount": params.answerCount //答案数
-			};
-			$.ajax({
-				url: hostSetting + '/schoolwork/bulkAddQuestion?ajax=true',
-				data: JSON.stringify(data),
-				type: 'POST',
-				contentType: 'application/json;charset=utf-8 ',
-				processData: false,
-				success: function success(result) {
-					defer.resolve(result);
-				},
-				fail: function fail(data) {
-					defer.reject(data);
-				}
-			});
-			return defer;
-		},
-		editTitle: function editTitle(params) {
-			var defer = $.Deferred();
-			var data = {
-				'schoolworkId': params.schoolworkId || '1', //作业本id
-				"schoolworkName": params.schoolworkName
-			};
-			$.ajax({
-				url: hostSetting + '/schoolwork/changeSchoolworkName?ajax=true',
-				data: JSON.stringify(data),
-				type: 'POST',
-				contentType: 'application/json;charset=utf-8 ',
-				processData: false,
-				success: function success(result) {
-					defer.resolve(result);
-				},
-				fail: function fail(data) {
-					defer.reject(data);
-				}
-			});
-			return defer;
-		},
-		getCourseBook: function getCourseBook(params) {
-			var defer = $.Deferred();
-			/**
-    * {
-    "cb":"01",       //册别
-    "edition":"RJ",  //教材版本
-    "grade": "01",   //年级
-    "subject":"SX"   //科目
-       }
-    *
-    * 开心版KX  人教版RJ  北师大版BS  语文版YW 外研版WY  粤沪版YH  粤教版YJ 科粤版KY 中图版ZT 川教版CJ 湘教版XJ 粤人民版YR 其他（包含总复习、专项类书籍，此类书籍无教材版本限制）QT
-    * 上册01，下册02  ，综合03，全一册04
-    * **/
-			var data = params || {
-				"cb": "01", //册别
-				"edition": "RJ", //教材版本
-				"grade": "01", //年级
-				"subject": "SX" //科目
-			};
-			$.ajax({
-				url: hostSetting + '/schoolwork/queryAllList?ajax=true',
-				data: JSON.stringify(data),
-				type: 'POST',
-				contentType: 'application/json;charset=utf-8 ',
-				processData: false,
-				success: function success(result) {
-					/**
-      * [
-          {
-             "cb":"01",        //册别：上册01，下册02  ，综合03，全一册04
-             "createBy":"题库测试帐号",         //建立人
-             "createDate":1503565633123,         //创建时间
-             "edition":"RJ",                   //教材版本
-             "grade":"01",   //年级一~九年级分别是01~09? 高一~高三是10,11,12
-             "id":"",         //暂时没有用上
-             "name":"vinson测试测试用",   //教材名字
-             "schoolId":"",     //学校id(暂时没有用上)
-             "startyear":null,   //年份(暂时没有用上)
-             "subject":"YW",     //科目
-             "textbookId":"350325186228125696",  //教材id
-             "updateBy":"题库测试帐号",           //更新人
-             "updateDate":1503566101559,       //更新时间
-             "xq":""                //学期(暂时没有用上)
-            }
-      ]
-      * **/
-					defer.resolve(result);
-				},
-				fail: function fail(data) {
-					defer.reject(data);
-				}
-			});
-			return defer;
-		},
-		getChapter: function getChapter(textBookId) {
-			var defer = $.Deferred();
-			var data = {
-				'textBookId': textBookId || '1'
-			};
-			$.ajax({
-				url: hostSetting + '/schoolwork/getTbCatalogList?ajax=true',
-				data: JSON.stringify(data),
-				type: 'POST',
-				contentType: 'application/json;charset=utf-8 ',
-				processData: false,
-				success: function success(result) {
-					/**
-      * [
-      {
-      id
-      level: '层级:1,2,3,4 ',
-      page: 所在页码,
-      name: 章节名称,
-      orderBy: 排序,
-      paretId: '父编号，为空表示顶级'
-      }
-      ]
-      * **/
-					defer.resolve(result);
-				},
-				fail: function fail(data) {
-					defer.reject(data);
-				}
-			});
-			return defer;
-		},
-		getKnpList: function getKnpList(params) {
-			var defer = $.Deferred();
-			var data = {
-				'tbCatalogId': params.id || '1',
-				'knpName': params.knpName || '' //知识点名字
-			};
-			$.ajax({
-				url: hostSetting + '/schoolwork/getKnpList?ajax=true',
-				data: JSON.stringify(data),
-				type: 'POST',
-				contentType: 'application/json;charset=utf-8 ',
-				processData: false,
-				success: function success(result) {
-					/***
-      * [{
-      * "knpName": 知识点名
-         "knpId": 知识点id
-      *
-      * }]
-      *
-      * **/
-					defer.resolve(result);
-				},
-				fail: function fail(data) {
-					defer.reject(data);
-				}
-			});
-			return defer;
-		},
-
-		addAllKnp: function addAllKnp(params) {
-			var defer = $.Deferred();
-			var data = {
-				'schoolworkId': params.schoolworkId || '1', //作业本id
-				'knpList': params.knpList || [] //题目id
-			};
-			$.ajax({
-				url: hostSetting + '/schoolwork/bulkAddKnp?ajax=true',
-				data: JSON.stringify(data),
-				type: 'POST',
-				contentType: 'application/json;charset=utf-8 ',
-				processData: false,
-				success: function success(result) {
-					defer.resolve(result);
-				},
-				fail: function fail(data) {
-					defer.reject(data);
-				}
-			});
-			return defer;
-		}
-	};
+	module.exports = __webpack_require__(1);
 
 	/***/
 },
-/* 6 */
+/* 1 */
 /***/function (module, exports, __webpack_require__) {
 
 	/**
   * Created by lomo on 2017/10/5.
   */
-	var store = __webpack_require__(7);
-	var VueRouter = __webpack_require__(8);
-	var routes = __webpack_require__(10);
+	var store = __webpack_require__(2);
+	var VueRouter = __webpack_require__(4);
+	var routes = __webpack_require__(6);
 
 	Vue.use(VueRouter);
 	//创建路由
@@ -465,14 +79,14 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 
 	/***/
 },
-/* 7 */
+/* 2 */
 /***/function (module, exports, __webpack_require__) {
 
 	/**
   * Created by lomoliang on 2017/10/5.
   */
 	Vue.use(Vuex);
-	var ajax = __webpack_require__(5);
+	var ajax = __webpack_require__(3);
 	function checkData(json) {
 		if (json.rtnCode == 0) {
 			return json.bizData;
@@ -936,7 +550,389 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 
 	/***/
 },
-/* 8 */
+/* 3 */
+/***/function (module, exports) {
+
+	/**
+  * Created by lomo on 2017/10/7.
+  */
+	var hostSetting = window.hostSetting || 'http://211.159.185.181:8080';
+	module.exports = {
+		getSchoolWork: function getSchoolWork(id) {
+			var defer = $.Deferred();
+			var data = {
+				'schoolworkId': id || '1'
+			};
+			$.ajax({
+				url: hostSetting + '/schoolwork/getSchoolwork?ajax=true',
+				data: JSON.stringify(data),
+				type: 'POST',
+				contentType: 'application/json;charset=utf-8 ',
+				processData: false,
+				success: function success(result) {
+
+					/**
+      *
+      id,      ‘编号’
+      name,            ‘作业名’
+      grade,      '年级一~九年级分别是01~09? 高一~高三是10,11,12 ',
+      subject,    '科目：00-未知, YW-语文,SX-数学,YY-英语,WL-物理,HX-化学,SW-生物,DL-地理,ZZ-政治,LS-历史,JK-健康,KX-科学,XX-信息,TY-体育, MU-音乐,MS-美术,SF-书法,SP-思想品德,WZ-文科综合,LZ-理科综合'
+      columes,     '栏目数，1 一栏，2两栏，3三栏'
+      jinzhizuodaqu,     '设置禁止作答区: 1是，0否'
+      useRang,           '使用范围: 1 个人使用，2 校内共享'
+      cardFormat,          '答题方式：1 卷卡合一，2答题卡，3题卡分离'
+      status,               '状态 1 草稿，2 已发布，3已禁用'
+      pdfPath,             'pdf路径'
+      bookId ,             '关联的教辅书id'
+      schoolId ,            '学校id'
+      description ,          '介绍'
+      createName ,         '建立人姓名'
+      createBy ,            '建立人id'
+      createDate ,          '收录时间'
+      updateBy,            '最后修改人'
+      updateDate,          '最后修改时间'
+      * **/
+					defer.resolve(result);
+				},
+				fail: function fail(data) {
+					defer.reject(data);
+				}
+			});
+			return defer;
+		},
+		getErrorQuestion: function getErrorQuestion(id) {
+			var defer = $.Deferred();
+			var data = {
+				'schoolworkId': id || '1'
+			};
+			$.ajax({
+				url: hostSetting + '/schoolwork/getErrorSchoolwork?ajax=true',
+				data: JSON.stringify(data),
+				type: 'POST',
+				contentType: 'application/json;charset=utf-8 ',
+				processData: false,
+				success: function success(result) {
+					defer.resolve(result);
+				},
+				fail: function fail(data) {
+					defer.reject(data);
+				}
+			});
+			return defer;
+		},
+		getAllQuestion: function getAllQuestion(id) {
+			var defer = $.Deferred();
+			var data = {
+				'schoolworkId': id || '1'
+			};
+			$.ajax({
+				url: hostSetting + '/schoolwork/getNormalQuestion?ajax=true',
+				data: JSON.stringify(data),
+				type: 'POST',
+				contentType: 'application/json;charset=utf-8 ',
+				processData: false,
+				success: function success(result) {
+					defer.resolve(result);
+				},
+				fail: function fail(data) {
+					defer.reject(data);
+				}
+			});
+			return defer;
+		},
+
+		getQuestion: function getQuestion(params) {
+			var defer = $.Deferred();
+			var data = {
+				'schoolworkId': params.id || '1', //作业本id
+				'questionId': params.qId || '' //题目id
+			};
+			$.ajax({
+				url: hostSetting + '/schoolwork/getQuestionDetails?ajax=true',
+				data: JSON.stringify(data),
+				type: 'POST',
+				contentType: 'application/json;charset=utf-8 ',
+				processData: false,
+				success: function success(result) {
+					defer.resolve(result);
+				},
+				fail: function fail(data) {
+					defer.reject(data);
+				}
+			});
+			return defer;
+		},
+		modifyQuestion: function modifyQuestion(params) {
+			var defer = $.Deferred();
+			var data = {
+				'schoolworkId': params.schoolworkId || '1', //作业本id
+				'questionId': params.questionId || '', //题目id
+				"orderBy": params.orderBy, //题目序号
+				"stem": params.stem, //题干
+				"shareStem": params.shareStem || '',
+				"score": params.score, //分数
+				"qtypeInner": params.qtypeInner, //录入题型（内部题型）：单选1，多选2，简答 4
+				"answerCount": params.answerCount, //答案数
+				"answer": params.answer, //答案，用逗号','分割
+				"difficulty": params.difficulty, //难度
+				"knpList": params.knpList, //知识点，用逗号','分割
+				"height": params.height || 100
+
+			};
+			$.ajax({
+				url: hostSetting + '/schoolwork/modify?ajax=true',
+				data: JSON.stringify(params),
+				type: 'POST',
+				contentType: 'application/json;charset=utf-8 ',
+				processData: false,
+				success: function success(result) {
+					defer.resolve(result);
+				},
+				fail: function fail(data) {
+					defer.reject(data);
+				}
+			});
+			return defer;
+		},
+		delQuestion: function delQuestion(params) {
+			var defer = $.Deferred();
+			var data = {
+				'schoolworkId': params.schoolworkId || '1', //作业本id
+				'questionId': params.questionId || '' //题目id
+			};
+			$.ajax({
+				url: hostSetting + '/schoolwork/delQuestion?ajax=true',
+				data: JSON.stringify(data),
+				type: 'POST',
+				contentType: 'application/json;charset=utf-8 ',
+				processData: false,
+				success: function success(result) {
+					defer.resolve(result);
+				},
+				fail: function fail(data) {
+					defer.reject(data);
+				}
+			});
+			return defer;
+		},
+		udQuestion: function udQuestion(params) {
+			var defer = $.Deferred();
+			/**
+    * questionList:[
+    {
+        questionId:题目id,
+        scope:分数,
+        orderBy:排序
+    }
+    ]
+    * **/
+			var data = {
+				'schoolworkId': params.id || '1', //作业本id
+				'questionList': params.questionList
+			};
+			$.ajax({
+				url: hostSetting + '/schoolwork/updateSchoolworkQuestion?ajax=true',
+				data: JSON.stringify(data),
+				type: 'POST',
+				contentType: 'application/json;charset=utf-8 ',
+				processData: false,
+				success: function success(result) {
+					defer.resolve(result);
+				},
+				fail: function fail(data) {
+					console.log('~~~~~');
+					defer.reject();
+				}
+			});
+			return defer;
+		},
+		addQuestion: function addQuestion(params) {
+			var defer = $.Deferred();
+			var data = {
+				'schoolworkId': params.schoolworkId || '1', //作业本id
+				"orderBy": params.orderBy, //题目序号
+				"endOrderBy": params.endOrderBy,
+				"qtypeInner": params.qtypeInner, //录入题型（内部题型）：单选1，多选2，简答 4
+				"answerCount": params.answerCount //答案数
+			};
+			$.ajax({
+				url: hostSetting + '/schoolwork/bulkAddQuestion?ajax=true',
+				data: JSON.stringify(data),
+				type: 'POST',
+				contentType: 'application/json;charset=utf-8 ',
+				processData: false,
+				success: function success(result) {
+					defer.resolve(result);
+				},
+				fail: function fail(data) {
+					defer.reject(data);
+				}
+			});
+			return defer;
+		},
+		editTitle: function editTitle(params) {
+			var defer = $.Deferred();
+			var data = {
+				'schoolworkId': params.schoolworkId || '1', //作业本id
+				"schoolworkName": params.schoolworkName
+			};
+			$.ajax({
+				url: hostSetting + '/schoolwork/changeSchoolworkName?ajax=true',
+				data: JSON.stringify(data),
+				type: 'POST',
+				contentType: 'application/json;charset=utf-8 ',
+				processData: false,
+				success: function success(result) {
+					defer.resolve(result);
+				},
+				fail: function fail(data) {
+					defer.reject(data);
+				}
+			});
+			return defer;
+		},
+		getCourseBook: function getCourseBook(params) {
+			var defer = $.Deferred();
+			/**
+    * {
+    "cb":"01",       //册别
+    "edition":"RJ",  //教材版本
+    "grade": "01",   //年级
+    "subject":"SX"   //科目
+       }
+    *
+    * 开心版KX  人教版RJ  北师大版BS  语文版YW 外研版WY  粤沪版YH  粤教版YJ 科粤版KY 中图版ZT 川教版CJ 湘教版XJ 粤人民版YR 其他（包含总复习、专项类书籍，此类书籍无教材版本限制）QT
+    * 上册01，下册02  ，综合03，全一册04
+    * **/
+			var data = params || {
+				"cb": "01", //册别
+				"edition": "RJ", //教材版本
+				"grade": "01", //年级
+				"subject": "SX" //科目
+			};
+			$.ajax({
+				url: hostSetting + '/schoolwork/queryAllList?ajax=true',
+				data: JSON.stringify(data),
+				type: 'POST',
+				contentType: 'application/json;charset=utf-8 ',
+				processData: false,
+				success: function success(result) {
+					/**
+      * [
+          {
+             "cb":"01",        //册别：上册01，下册02  ，综合03，全一册04
+             "createBy":"题库测试帐号",         //建立人
+             "createDate":1503565633123,         //创建时间
+             "edition":"RJ",                   //教材版本
+             "grade":"01",   //年级一~九年级分别是01~09? 高一~高三是10,11,12
+             "id":"",         //暂时没有用上
+             "name":"vinson测试测试用",   //教材名字
+             "schoolId":"",     //学校id(暂时没有用上)
+             "startyear":null,   //年份(暂时没有用上)
+             "subject":"YW",     //科目
+             "textbookId":"350325186228125696",  //教材id
+             "updateBy":"题库测试帐号",           //更新人
+             "updateDate":1503566101559,       //更新时间
+             "xq":""                //学期(暂时没有用上)
+            }
+      ]
+      * **/
+					defer.resolve(result);
+				},
+				fail: function fail(data) {
+					defer.reject(data);
+				}
+			});
+			return defer;
+		},
+		getChapter: function getChapter(textBookId) {
+			var defer = $.Deferred();
+			var data = {
+				'textBookId': textBookId || '1'
+			};
+			$.ajax({
+				url: hostSetting + '/schoolwork/getTbCatalogList?ajax=true',
+				data: JSON.stringify(data),
+				type: 'POST',
+				contentType: 'application/json;charset=utf-8 ',
+				processData: false,
+				success: function success(result) {
+					/**
+      * [
+      {
+      id
+      level: '层级:1,2,3,4 ',
+      page: 所在页码,
+      name: 章节名称,
+      orderBy: 排序,
+      paretId: '父编号，为空表示顶级'
+      }
+      ]
+      * **/
+					defer.resolve(result);
+				},
+				fail: function fail(data) {
+					defer.reject(data);
+				}
+			});
+			return defer;
+		},
+		getKnpList: function getKnpList(params) {
+			var defer = $.Deferred();
+			var data = {
+				'tbCatalogId': params.id || '1',
+				'knpName': params.knpName || '' //知识点名字
+			};
+			$.ajax({
+				url: hostSetting + '/schoolwork/getKnpList?ajax=true',
+				data: JSON.stringify(data),
+				type: 'POST',
+				contentType: 'application/json;charset=utf-8 ',
+				processData: false,
+				success: function success(result) {
+					/***
+      * [{
+      * "knpName": 知识点名
+         "knpId": 知识点id
+      *
+      * }]
+      *
+      * **/
+					defer.resolve(result);
+				},
+				fail: function fail(data) {
+					defer.reject(data);
+				}
+			});
+			return defer;
+		},
+
+		addAllKnp: function addAllKnp(params) {
+			var defer = $.Deferred();
+			var data = {
+				'schoolworkId': params.schoolworkId || '1', //作业本id
+				'knpList': params.knpList || [] //题目id
+			};
+			$.ajax({
+				url: hostSetting + '/schoolwork/bulkAddKnp?ajax=true',
+				data: JSON.stringify(data),
+				type: 'POST',
+				contentType: 'application/json;charset=utf-8 ',
+				processData: false,
+				success: function success(result) {
+					defer.resolve(result);
+				},
+				fail: function fail(data) {
+					defer.reject(data);
+				}
+			});
+			return defer;
+		}
+	};
+
+	/***/
+},
+/* 4 */
 /***/function (module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function (process) {
@@ -3391,11 +3387,11 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 		module.exports = VueRouter;
 
 		/* WEBPACK VAR INJECTION */
-	}).call(exports, __webpack_require__(9));
+	}).call(exports, __webpack_require__(5));
 
 	/***/
 },
-/* 9 */
+/* 5 */
 /***/function (module, exports) {
 
 	// shim for using process in browser
@@ -3586,15 +3582,15 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 
 	/***/
 },
-/* 10 */
+/* 6 */
 /***/function (module, exports, __webpack_require__) {
 
 	/**
   * Created by lomo on 2017/10/5.
   */
-	var edit = __webpack_require__(11);
-	var preview = __webpack_require__(20);
-	var download = __webpack_require__(23);
+	var edit = __webpack_require__(7);
+	var preview = __webpack_require__(16);
+	var download = __webpack_require__(19);
 
 	//require('./pages/preview/preview.vue');
 
@@ -3604,7 +3600,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 
 	/***/
 },
-/* 11 */
+/* 7 */
 /***/function (module, exports, __webpack_require__) {
 
 	/**
@@ -3612,12 +3608,12 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   * @type {Vuex.Store|*|exports|module.exports}
   */
 
-	var store = __webpack_require__(7);
-	var tpl = __webpack_require__(12);
-	var editLayer = __webpack_require__(13);
-	var loadingLayer = __webpack_require__(16);
-	var editTag = __webpack_require__(18);
-	var util = __webpack_require__(15);
+	var store = __webpack_require__(2);
+	var tpl = __webpack_require__(8);
+	var editLayer = __webpack_require__(9);
+	var loadingLayer = __webpack_require__(12);
+	var editTag = __webpack_require__(14);
+	var util = __webpack_require__(11);
 
 	module.exports = {
 		template: tpl,
@@ -4199,22 +4195,22 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 
 	/***/
 },
-/* 12 */
+/* 8 */
 /***/function (module, exports) {
 
 	module.exports = "<div>\r\n\r\n    <!--步骤栏-->\r\n    <div class=\"top-bar\">\r\n        <div class=\"box\">第1步：新建作业</div>\r\n        <div class=\"arrow current\"></div>\r\n\r\n        <div class=\"box current\">第2步：作业编辑</div>\r\n        <div class=\"arrow \"></div>\r\n\r\n        <div class=\"box \">第3步：作业预览</div>\r\n        <div class=\"arrow current\"></div>\r\n\r\n        <div class=\"box \">第4步：生成作业</div>\r\n    </div>\r\n    <!--有问题的题目-->\r\n    <div class=\"problem-bar\" v-if=\"errorData && errorData.length\">\r\n        <table>\r\n            <tr>\r\n                <th>题号</th>\r\n                <th>问题</th>\r\n                <th>解决建议</th>\r\n                <th>调整</th>\r\n            </tr>\r\n            <template v-for=\"item in errorData\">\r\n                <tr>\r\n                    <td>第{{item.orderBy}}题</td>\r\n                    <td>{{item.errMgs}}</td>\r\n                    <td>{{item.suggest}}</td>\r\n                    <td class=\"fix\" v-on:click=\"callfix(item.orderBy)\">调整</td>\r\n                </tr>\r\n            </template>\r\n        </table>\r\n    </div>\r\n    <!--添加新题-->\r\n    <div class=\"create-bar\" id=\"create-bar\">\r\n        <div>\r\n            <span>添加题目</span>\r\n            <div class=\"button\" data-type=\"1\">+ 单选题</div>\r\n            <div class=\"button\" data-type=\"2\">+ 多选题</div>\r\n            <div class=\"button\" data-type=\"3\">+ 填空题</div>\r\n            <div class=\"button\" data-type=\"4\">+ 简答题</div>\r\n\r\n            <div class=\"to-top\">返回顶部</div>\r\n            <div class=\"reFormat\" v-on:click=\"reFormat\">调整排版</div>\r\n\r\n            <div class=\"mark-wrap\">\r\n                <input style=\"margin-right:5px\" type=\"checkbox\" name=\"checkbox1\" value=\"true\" v-model=\"isShowMarks\"/>添加分数（试卷总分：{{totalMark}}）\r\n            </div>\r\n        </div>\r\n    </div>\r\n\r\n    <!--编辑题目区域-->\r\n    <div class=\"main-area\">\r\n        <!--题目区-->\r\n        <div class=\"test-paper\">\r\n            <div class=\"page-Wrap edit-page\">\r\n                <div class=\"page none\" id=\"hiddenPage\">\r\n                    <div class=\"head\">\r\n                        <div class=\"title\">{{bookInfo.name}}</div>\r\n                        <div class=\"information\">\r\n                            班级___________&nbsp&nbsp&nbsp&nbsp&nbsp\r\n                            姓名___________&nbsp&nbsp&nbsp&nbsp&nbsp\r\n                            学号___________\r\n                        </div>\r\n                        <div class=\"detail\">\r\n                            【客观题填涂的正确方法】<br>\r\n                            • 请使用用2B铅笔填涂；修改时用橡皮擦擦干净；<br>\r\n                            • 填涂的正确方法是：<br>\r\n                            【主观题填涂的正确方法】<br>\r\n                            • 请在答题方框内作答，超出将视为无效答案内容\r\n                            <div class=\"QRCode\">二维码</div>\r\n                            <div class=\"example-block\">\r\n                                <div class=\"block\"></div>\r\n                                <div class=\"block white\"></div>\r\n                                <div class=\"block white\"></div>\r\n                                <div class=\"block white\"></div>\r\n                            </div>\r\n                        </div>\r\n                    </div>\r\n                    <div class=\"answer\">\r\n                        <div class=\"block top-left\"></div>\r\n                        <div class=\"block top-right\"></div>\r\n                        <div class=\"block bottom-left\"></div>\r\n\r\n                        <div class=\"fillArea\" v-if=\"qListForRender && qListForRender.length\">\r\n                            <template v-for=\"item in qListForRender\">\r\n                                <div class=\"fillArea-answer answerarea\" v-if=\"item.qtypeInner == 1 || item.qtypeInner == 2\"\r\n                                     :data-qid=\"item.questionId\" :data-order=\"item.orderBy\" :data-type=\"item.qtypeInner\">\r\n                                    <span>{{item.orderBy}}</span>\r\n                                    <div class=\"fillArea-block answerblock\" v-for=\"selection in item.answerCountArray\">\r\n                                        {{selection}}\r\n                                    </div>\r\n                                </div>\r\n                            </template>\r\n                        </div>\r\n                    </div>\r\n                    <div class=\"stem-area\" v-if=\"qListForRender && qListForRender.length\">\r\n                        <template v-for=\"item in qListForRender\">\r\n                            <div class=\"stem\" :data-qid=\"item.questionId\" :data-qtype=\"item.qtypeInner\"\r\n                                 :data-order=\"item.orderBy\">\r\n                                <div class=\"share-stem\" v-if=\"item.shareStem\" v-html=\"item.shareStem\"></div>\r\n                                <div class=\"orderBy\">\r\n                                    第{{item.orderBy}}题\r\n                                    <div v-if=\"item.qtypeInner==1\" class=\"qtypeInner\">单选题</div>\r\n                                    <div v-if=\"item.qtypeInner==2\" class=\"qtypeInner\">多选题</div>\r\n                                    <div v-if=\"item.qtypeInner==3\" class=\"qtypeInner\">填空题</div>\r\n                                    <div v-if=\"item.qtypeInner==4\" class=\"qtypeInner\">简答题</div>\r\n\r\n                                    <div v-if=\"item.score && isShowMarks\" class=\"score\">（{{item.score}}分）</div>\r\n                                </div>\r\n                                <template v-if=\"bookInfo.cardFormat != 1\">\r\n                                    <section></section>\r\n                                </template>\r\n                                <template v-if=\"bookInfo.cardFormat == 1\">\r\n                                    <section v-html=\"item.stem\"></section>\r\n                                </template>\r\n                                <div class=\"answer-area\" v-if=\"item.qtypeInner != 1 && item.qtypeInner != 2\" v-bind:style=\"{height: item.height + 'px'}\">\r\n                                    我的作答\r\n                                </div>\r\n                            </div>\r\n                        </template>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n        </div>\r\n        <!--编辑区-->\r\n        <div class=\"edit-area\">\r\n            <template v-for=\"(item, index) in editData\">\r\n                <edit-tag :orderBy=\"index+1\" v-on:knpLinkClick=\"callKnp(index+1)\"\r\n                          v-on:editLinkClick=\"callfix(index+1)\" v-bind:isShowMarks=\"isShowMarks\"></edit-tag>\r\n            </template>\r\n            <div class=\"edit-add\" v-on:click=\"addQuestion\">\r\n                添加新题\r\n            </div>\r\n        </div>\r\n        <!--选中浮层-->\r\n        <div class=\"hover-layer none\">\r\n            <div class=\"hover-btns\">\r\n                <div class=\"hover-edit\">编辑题目</div>\r\n                <div class=\"hover-insert\">插入题目</div>\r\n                <div class=\"hover-delete\">删除题目</div>\r\n                <div class=\"hover-text\">编辑上方文本</div>\r\n                <div class=\"hover-remove\">删除上方文本</div>\r\n                <div class=\"hover-up\">上移</div>\r\n                <div class=\"hover-down\">下移</div>\r\n            </div>\r\n        </div>\r\n        <!--编辑题目-->\r\n        <div class=\"title-edit none\">\r\n            <input type=\"text\" v-model=\"bookInfo.name\">\r\n        </div>\r\n    </div>\r\n\r\n    <div class=\"preview-bar\">\r\n        <div class=\"preview-btn\" v-on:click=\"toPreview\">作业预览</div>\r\n    </div>\r\n\r\n    <loading-layer></loading-layer>\r\n    <edit-layer></edit-layer>\r\n</div>\r\n";
 
 	/***/
 },
-/* 13 */
+/* 9 */
 /***/function (module, exports, __webpack_require__) {
 
 	/**
   * Created by jie on 2017/10/15.
   */
-	var tpl = __webpack_require__(14);
-	var store = __webpack_require__(7);
-	var util = __webpack_require__(15);
+	var tpl = __webpack_require__(10);
+	var store = __webpack_require__(2);
+	var util = __webpack_require__(11);
 
 	var ue;
 	var ue2;
@@ -4228,7 +4224,8 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 				coursebookId: ' ',
 				selectedKplList: [],
 				isAddAll: false,
-				searchText: ''
+				searchText: '',
+				selectionNums: 7
 			};
 		},
 		mounted: function mounted() {
@@ -4248,18 +4245,12 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 				elementPathEnabled: false,
 				initialFrameHeight: 300
 			});
-			$('.chapter')
-			//.on('click', function (e) {
-			//    $(this).toggleClass('fold')
-			//    e.stopPropagation();
-			//})
-			.on('click', '.list', function (e) {
+			$('.chapter').on('click', '.list', function (e) {
 				var id = $(this).attr('data-id');
 				console.log(id);
 				if (id) {
 					$(this).toggleClass('fold');
 				}
-				//that.$store.dispatch('GET_KNPLIST',id);
 				e.stopPropagation();
 			});
 			$('.add-knp').on('click', function () {
@@ -4650,6 +4641,18 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 			},
 			qListForRender: function qListForRender() {
 				return this.$store.state.qListForRender;
+			},
+			selectionArr: function selectionArr() {
+				var arr = {};
+				if (this.selectionNums) {
+					arr['0'] = '选项个数';
+					var i = 2;
+					while (i <= this.selectionNums) {
+						arr[i] = i;
+						i++;
+					}
+				}
+				return arr;
 			}
 		},
 		watch: {
@@ -4667,14 +4670,14 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 
 	/***/
 },
-/* 14 */
+/* 10 */
 /***/function (module, exports) {
 
-	module.exports = "<!--遮罩层-->\r\n<div>\r\n    <!--透明浮层-->\r\n    <div v-bind:class=\"{ none: hideLayer, layer:true}\" id=\"layer\"></div>\r\n    <!--新建题目-->\r\n    <div v-bind:class=\"{ none: hideAddLayer, 'edit-layer':true, 'add-layer':true, 'anim-opacity2': !hideAddLayer}\">\r\n        <div class=\"top\">\r\n            添加题目\r\n            <div class=\"icon-close\" v-on:click=\"hideAdd\">\r\n                <img src=\"/images/close.png\" alt=\"\">\r\n            </div>\r\n        </div>\r\n        <div class=\"edit-wrap\">\r\n            <div class=\"edit-panel\">\r\n                <div class=\"edit-row\">\r\n                    <!--<div class=\"edit-row\">-->\r\n                        <!--<strong>添加题目{{addModel.orderBy}}</strong>-->\r\n                    <!--</div>-->\r\n                    <div class=\"inline\">\r\n                        <span><i>*</i>题型</span>\r\n                        <select v-model=\"addModel.qtypeInner\" class=\"select\">\r\n                            <option value=\"\">选择题型</option>\r\n                            <option value=\"1\">单选题</option>\r\n                            <option value=\"2\">多选题</option>\r\n                            <option value=\"3\">填空题</option>\r\n                            <option value=\"4\">简答题</option>\r\n                        </select>\r\n                    </div>\r\n                    <div class=\"inline\" v-if=\"addModel.qtypeInner == 1 || addModel.qtypeInner == 2\">\r\n                        <span><i>*</i>选项</span>\r\n                        <select v-model=\"addModel.answerCount\" class=\"select\">\r\n                            <option value=\"\">选项个数</option>\r\n                            <option value=\"2\">2</option>\r\n                            <option value=\"3\">3</option>\r\n                            <option value=\"4\">4</option>\r\n                            <option value=\"5\">5</option>\r\n                        </select>\r\n                    </div>\r\n                </div>\r\n                <div class=\"edit-row\">\r\n\r\n                    <div class=\"inline\">\r\n                        <span><i>*</i>题号</span>\r\n                        <input class=\"input\" type=\"number\" v-model=\"addModel.orderBy\">\r\n                    </div>\r\n                    <div class=\"inline\" >\r\n                        <span>至</span>\r\n                        <input class=\"input\" type=\"number\" v-model=\"addModel.endOrderBy\" >\r\n                    </div>\r\n                </div>\r\n                <div class=\"edit-save inline\" v-on:click=\"comfirmAdd\">确定</div>\r\n                <!--<div class=\"edit-save inline\">取消</div>-->\r\n            </div>\r\n        </div>\r\n    </div>\r\n    <!--编辑-->\r\n    <div v-bind:class=\"{ none: hideEditLayer, 'edit-layer':true, 'anim-opacity2': !hideEditLayer}\" id=\"editLayer\">\r\n        <div class=\"top\">\r\n            题目编辑\r\n            <div class=\"icon-close\" v-on:click=\"hideEdit\">\r\n                <img src=\"/images/close.png\" alt=\"\">\r\n            </div>\r\n        </div>\r\n        <div class=\"edit-wrap\">\r\n            <div class=\"edit-panel\">\r\n                <div class=\"edit-row\">\r\n                    <strong>第{{editingStem.orderBy}}题</strong>\r\n                </div>\r\n                <div class=\"edit-row\">\r\n                    <div class=\"inline\">\r\n                        <span><i>*</i>题型</span>\r\n                        <select v-model=\"editingStem.qtypeInner\" class=\"select\" v-on:change=\"editTypeChange\">\r\n                            <option value=\"null\">选择题型</option>\r\n                            <option value=\"1\">单选题</option>\r\n                            <option value=\"2\">多选题</option>\r\n                            <option value=\"3\">填空题</option>\r\n                            <option value=\"4\">简答题</option>\r\n                        </select>\r\n                    </div>\r\n                    <div class=\"inline options\">\r\n                        <span><i>*</i>选项</span>\r\n                        <select v-model=\"editingStem.answerCount\" class=\"select\" v-on:change=\"selectNumChange\">\r\n                            <option value=\"2\">2</option>\r\n                            <option value=\"3\">3</option>\r\n                            <option value=\"4\">4</option>\r\n                            <option value=\"5\">5</option>\r\n                            <option value=\"0\">选项个数</option>\r\n                        </select>\r\n                    </div>\r\n\r\n                </div>\r\n                <div class=\"edit-row\">\r\n                    <span><i>*</i>难度</span>\r\n\r\n                    <div v-if=\"editingStem.difficulty==0.8\" class=\"difficulty\" v-on:click=\"difficultyClick\">\r\n                        <div class=\"selected\" data-difficulty=\"0.8\">基础</div>\r\n                        <div data-difficulty=\"0.5\">巩固</div>\r\n                        <div data-difficulty=\"0.3\">提高</div>\r\n                    </div>\r\n                    <div v-else-if=\"editingStem.difficulty==0.5\" class=\"difficulty\" v-on:click=\"difficultyClick\">\r\n                        <div data-difficulty=\"0.8\">基础</div>\r\n                        <div class=\"selected\" data-difficulty=\"0.5\">巩固</div>\r\n                        <div data-difficulty=\"0.3\">提高</div>\r\n                    </div>\r\n                    <div v-else-if=\"editingStem.difficulty==0.3\" class=\"difficulty\" v-on:click=\"difficultyClick\">\r\n                        <div data-difficulty=\"0.8\">基础</div>\r\n                        <div data-difficulty=\"0.5\">巩固</div>\r\n                        <div class=\"selected\" data-difficulty=\"0.3\">提高</div>\r\n                    </div>\r\n                    <div v-else class=\"difficulty\" v-on:click=\"difficultyClick\">\r\n                        <div data-difficulty=\"0.8\">基础</div>\r\n                        <div data-difficulty=\"0.5\">巩固</div>\r\n                        <div data-difficulty=\"0.3\">提高</div>\r\n                    </div>\r\n                    <!--<span><i>&nbsp;</i>分值</span>-->\r\n                    <!--<input class=\"input\" type=\"text\" v-model=\"editingStem.score\">-->\r\n                </div>\r\n                <div class=\"edit-row\">\r\n                    <span><i>*</i>知识点</span>\r\n                    <div class=\"knowledge\">\r\n                        <template v-for=\"(knp,index) in editingStem.knpList\">\r\n                            <div >{{knp.knpName}}<img src=\"/images/delete.png\" style=\"float: right\"  alt=\"\" v-on:click=\"deleteKnp(index)\"></div>\r\n                        </template>\r\n                        <div class=\"add-knp\" style=\"padding-right: 10px\">添加</div>\r\n                    </div>\r\n                </div>\r\n                <div class=\"edit-row\">\r\n                    <span><i>*</i>题干</span>\r\n                    <div class=\"uEditor-area\">\r\n                        <script id=\"container1\" name=\"content\" type=\"text/plain\"></script>\r\n                    </div>\r\n                </div>\r\n\r\n                <div class=\"edit-row choose-answer\">\r\n                    <span><i>*</i>答案</span>\r\n                    <div class=\"answer\" id=\"selectAnswer\">\r\n                    </div>\r\n                </div>\r\n\r\n                <div class=\"edit-row blank-answer\">\r\n\r\n                    <span>&nbsp&nbsp答案</span>\r\n                    <div class=\"uEditor-area\">\r\n                        <script id=\"container2\" name=\"content\" type=\"text/plain\"></script>\r\n                    </div>\r\n                    <div>\r\n                        <span>高度</span>\r\n                        <input class=\"input\" type=\"text\" v-model=\"editingStem.height\">\r\n                    </div>\r\n\r\n                </div>\r\n\r\n                <div class=\"edit-save\" v-on:click=\"editSave\">保存</div>\r\n            </div>\r\n        </div>\r\n    </div>\r\n    <!--知识点-->\r\n    <div v-bind:class=\"{ none: hideKnpLayer, 'edit-layer':true, 'anim-opacity2': !hideKnpLayer, 'knp-layer' : true}\" id=\"KnpLayer\">\r\n        <div class=\"top\">\r\n            添加知识点\r\n            <div class=\"icon-close\" v-on:click=\"hideKnp\">\r\n                <img src=\"/images/close.png\" alt=\"\">\r\n            </div>\r\n        </div>\r\n        <div class=\"edit-wrap\">\r\n            <div class=\"edit-panel\">\r\n                <div class=\"selects\">\r\n                    <select class=\"select\" v-model=\"knpFilter.edition\" v-on:change=\"updateCourseBook\">\r\n                        <option value=\" \">选择教材版本</option>\r\n                        <option value=\"KX\">开心版</option>\r\n                        <option value=\"RJ\">人教版</option>\r\n                        <option value=\"BS\">北师大版</option>\r\n                        <option value=\"YW\">语文版</option>\r\n                        <option value=\"WY\">外研版</option>\r\n                        <option value=\"YH\">粤沪版</option>\r\n                        <option value=\"YJ\">粤教版</option>\r\n                        <option value=\"KY\">科粤版</option>\r\n                        <option value=\"ZT\">中图版</option>\r\n                        <option value=\"CJ\">川教版</option>\r\n                        <option value=\"XJ\">湘教版</option>\r\n                        <option value=\"YR\">粤人民版</option>\r\n                        <option value=\"QT\">其他（包含总复习、专项类书籍，此类书籍无教材版本限制）</option>\r\n                    </select>\r\n                    <select class=\"select\" v-model=\"knpFilter.cb\" v-on:change=\"updateCourseBook\">\r\n                        <option value=\" \">选择册别</option>\r\n                        <option value=\"01\">上册</option>\r\n                        <option value=\"02\">下册</option>\r\n                        <option value=\"03\">综合</option>\r\n                        <option value=\"04\">全一册</option>\r\n                    </select>\r\n                    <template v-if=\"courseBook && courseBook.length\">\r\n                        <select class=\"select\" v-on:change=\"updateChapters\" v-model=\"coursebookId\">\r\n                            <option value=\" \">选择教材</option>\r\n                            <option v-for=\"item in courseBook\" :value=\"item.textbookId\">{{item.name}}</option>\r\n                        </select>\r\n                    </template>\r\n                </div>\r\n                <div class=\"add-all\">\r\n                    <input style=\"margin-right:5px\" type=\"checkbox\" name=\"checkbox1\" value=\"true\" v-model=\"isAddAll\"/><span style=\"color: #ff920b\">其他题目同选一样的知识点</span> <span style=\"color: #c6c6c6\">(还没选择知识点的题目)</span>\r\n                </div>\r\n                <div class=\"add-all\">\r\n                    <input style=\"margin-right:5px;width: 456px\" type=\"text\"  v-model=\"searchText\"/>输入关键字搜索\r\n                    <!--<div class=\"search-btn\" v-on:click=\"searchKnp\">搜索</div>-->\r\n                </div>\r\n                <div class=\"chapter\" v-if=\"chapterListForRender\">\r\n                    <template v-for=\"item in chapterListForRender\">\r\n                            <div class=\"list level1\" :data-id=\"item.id\" v-bind:class=\"{fold: !item.unFold}\">\r\n                                <span class=\"level1\">{{item.name}}</span>\r\n\r\n                                <template v-for=\"item2 in item.son\">\r\n                                    <div class=\"list level2\" :data-id=\"item2.id\" v-bind:class=\"{fold: !item2.unFold}\">\r\n                                        <span class=\"level2\">{{item2.name}}</span>\r\n\r\n                                        <template v-for=\"item3 in item2.son\">\r\n                                            <div class=\"list level3\" :data-id=\"item3.id\" v-bind:class=\"{fold: !item3.unFold}\">\r\n                                                <span class=\"level3\">{{item3.name}}</span>\r\n\r\n                                                <template v-for=\"item4 in item3.son\" >\r\n                                                    <div class=\"list level4\" :data-id=\"item4.id\" v-bind:class=\"{fold: !item4.unFold}\">\r\n                                                        <span class=\"level4\">{{item4.name}}</span>\r\n                                                    </div>\r\n\r\n                                                    <template v-for=\"knp4 in item4.knpList\" v-bind:class=\"{selected: searchText && knp4.knpName.indexOf(searchText) > -1, chosen: selectedKplList.indexOf(JSON.stringify(knp4)) > -1}\">\r\n                                                        <div class=\"knp-checkbox\">\r\n                                                            <input type=\"checkbox\" name=\"checkbox1\" :value=\"JSON.stringify(knp4)\" v-model=\"selectedKplList\"/>{{knp4.knpName}}\r\n                                                        </div>\r\n                                                    </template>\r\n                                                </template>\r\n\r\n                                                <template v-for=\"knp3 in item3.knpList\">\r\n                                                    <div class=\"knp-checkbox\" v-bind:class=\"{selected: searchText && knp3.knpName.indexOf(searchText) > -1, chosen: selectedKplList.indexOf(JSON.stringify(knp3)) > -1}\">\r\n                                                        <input type=\"checkbox\" name=\"checkbox1\" :value=\"JSON.stringify(knp3)\" v-model=\"selectedKplList\"/>{{knp3.knpName}}\r\n                                                    </div>\r\n                                                </template>\r\n\r\n                                            </div>\r\n                                        </template>\r\n\r\n                                        <template v-for=\"knp2 in item2.knpList\" v-bind:class=\"{selected: searchText && knp2.knpName.indexOf(searchText) > -1, chosen: selectedKplList.indexOf(JSON.stringify(knp2)) > -1}\">\r\n                                            <div class=\"knp-checkbox\">\r\n                                                <input type=\"checkbox\" name=\"checkbox1\" :value=\"JSON.stringify(knp2)\" v-model=\"selectedKplList\"/>{{knp2.knpName}}\r\n                                            </div>\r\n                                        </template>\r\n\r\n                                    </div>\r\n                                </template>\r\n\r\n                                <template v-for=\"knp in item.knpList\" >\r\n                                    <div class=\"knp-checkbox\" v-bind:class=\"{selected: searchText && knp.knpName.indexOf(searchText) > -1 , chosen: selectedKplList.indexOf(JSON.stringify(knp)) > -1}\">\r\n                                        <input type=\"checkbox\" name=\"checkbox1\" :value=\"JSON.stringify(knp)\" v-model=\"selectedKplList\"/>{{knp.knpName}}\r\n                                    </div>\r\n                                </template>\r\n                            </div>\r\n                    </template>\r\n                </div>\r\n                <div class=\"no-knp\" v-else >暂无知识点，请重新选择教材！</div>\r\n\r\n            </div>\r\n            <div  class=\"save-wrapper\">\r\n                <div class=\"edit-save\" v-on:click=\"knpSave\">保存</div>\r\n            </div>\r\n\r\n        </div>\r\n\r\n    </div>\r\n    <!--添加上方文本-->\r\n    <div v-bind:class=\"{ none: hideAddShareLayer, 'edit-layer':true, 'anim-opacity2': !hideAddShareLayer}\" id=\"addShareLayer\">\r\n        <div class=\"top\">\r\n            编辑上方文本\r\n            <div class=\"icon-close\" v-on:click=\"hideAddShare\">\r\n                <img src=\"/images/close.png\" alt=\"\">\r\n            </div>\r\n        </div>\r\n        <div class=\"edit-wrap\">\r\n            <div class=\"edit-panel\">\r\n                <div class=\"edit-row\">\r\n                    <div class=\"uEditor-area\">\r\n                        <script id=\"container3\" name=\"content\" type=\"text/plain\"></script>\r\n                    </div>\r\n                </div>\r\n                <div class=\"edit-save\" v-on:click=\"addShareSave\">保存</div>\r\n            </div>\r\n        </div>\r\n\r\n    </div>\r\n\r\n</div>";
+	module.exports = "<!--遮罩层-->\r\n<div>\r\n    <!--透明浮层-->\r\n    <div v-bind:class=\"{ none: hideLayer, layer:true}\" id=\"layer\"></div>\r\n    <!--新建题目-->\r\n    <div v-bind:class=\"{ none: hideAddLayer, 'edit-layer':true, 'add-layer':true, 'anim-opacity2': !hideAddLayer}\">\r\n        <div class=\"top\">\r\n            添加题目\r\n            <div class=\"icon-close\" v-on:click=\"hideAdd\">\r\n                <img src=\"/images/close.png\" alt=\"\">\r\n            </div>\r\n        </div>\r\n        <div class=\"edit-wrap\">\r\n            <div class=\"edit-panel\">\r\n                <div class=\"edit-row\">\r\n                    <!--<div class=\"edit-row\">-->\r\n                        <!--<strong>添加题目{{addModel.orderBy}}</strong>-->\r\n                    <!--</div>-->\r\n                    <div class=\"inline\">\r\n                        <span><i>*</i>题型</span>\r\n                        <select v-model=\"addModel.qtypeInner\" class=\"select\">\r\n                            <option value=\"\">选择题型</option>\r\n                            <option value=\"1\">单选题</option>\r\n                            <option value=\"2\">多选题</option>\r\n                            <option value=\"3\">填空题</option>\r\n                            <option value=\"4\">简答题</option>\r\n                        </select>\r\n                    </div>\r\n                    <div class=\"inline\" v-if=\"addModel.qtypeInner == 1 || addModel.qtypeInner == 2\">\r\n                        <span><i>*</i>选项</span>\r\n                        <select v-model=\"addModel.answerCount\" class=\"select\">\r\n                            <template v-for=\"item,key in selectionArr\">\r\n                                <option :value=\"key\">{{item}}</option>\r\n                            </template>\r\n                        </select>\r\n                    </div>\r\n                </div>\r\n                <div class=\"edit-row\">\r\n\r\n                    <div class=\"inline\">\r\n                        <span><i>*</i>题号</span>\r\n                        <input class=\"input\" type=\"number\" v-model=\"addModel.orderBy\">\r\n                    </div>\r\n                    <div class=\"inline\" >\r\n                        <span>至</span>\r\n                        <input class=\"input\" type=\"number\" v-model=\"addModel.endOrderBy\" >\r\n                    </div>\r\n                </div>\r\n                <div class=\"edit-save inline\" v-on:click=\"comfirmAdd\">确定</div>\r\n                <!--<div class=\"edit-save inline\">取消</div>-->\r\n            </div>\r\n        </div>\r\n    </div>\r\n    <!--编辑-->\r\n    <div v-bind:class=\"{ none: hideEditLayer, 'edit-layer':true, 'anim-opacity2': !hideEditLayer}\" id=\"editLayer\">\r\n        <div class=\"top\">\r\n            题目编辑\r\n            <div class=\"icon-close\" v-on:click=\"hideEdit\">\r\n                <img src=\"/images/close.png\" alt=\"\">\r\n            </div>\r\n        </div>\r\n        <div class=\"edit-wrap\">\r\n            <div class=\"edit-panel\">\r\n                <div class=\"edit-row\">\r\n                    <strong>第{{editingStem.orderBy}}题</strong>\r\n                </div>\r\n                <div class=\"edit-row\">\r\n                    <div class=\"inline\">\r\n                        <span><i>*</i>题型</span>\r\n                        <select v-model=\"editingStem.qtypeInner\" class=\"select\" v-on:change=\"editTypeChange\">\r\n                            <option value=\"null\">选择题型</option>\r\n                            <option value=\"1\">单选题</option>\r\n                            <option value=\"2\">多选题</option>\r\n                            <option value=\"3\">填空题</option>\r\n                            <option value=\"4\">简答题</option>\r\n                        </select>\r\n                    </div>\r\n                    <div class=\"inline options\">\r\n                        <span><i>*</i>选项</span>\r\n                        <select v-model=\"editingStem.answerCount\" class=\"select\" v-on:change=\"selectNumChange\">\r\n                            <option value=\"2\">2</option>\r\n                            <option value=\"3\">3</option>\r\n                            <option value=\"4\">4</option>\r\n                            <option value=\"5\">5</option>\r\n                            <option value=\"0\">选项个数</option>\r\n                        </select>\r\n                    </div>\r\n\r\n                </div>\r\n                <div class=\"edit-row\">\r\n                    <span><i>*</i>难度</span>\r\n\r\n                    <div v-if=\"editingStem.difficulty==0.8\" class=\"difficulty\" v-on:click=\"difficultyClick\">\r\n                        <div class=\"selected\" data-difficulty=\"0.8\">基础</div>\r\n                        <div data-difficulty=\"0.5\">巩固</div>\r\n                        <div data-difficulty=\"0.3\">提高</div>\r\n                    </div>\r\n                    <div v-else-if=\"editingStem.difficulty==0.5\" class=\"difficulty\" v-on:click=\"difficultyClick\">\r\n                        <div data-difficulty=\"0.8\">基础</div>\r\n                        <div class=\"selected\" data-difficulty=\"0.5\">巩固</div>\r\n                        <div data-difficulty=\"0.3\">提高</div>\r\n                    </div>\r\n                    <div v-else-if=\"editingStem.difficulty==0.3\" class=\"difficulty\" v-on:click=\"difficultyClick\">\r\n                        <div data-difficulty=\"0.8\">基础</div>\r\n                        <div data-difficulty=\"0.5\">巩固</div>\r\n                        <div class=\"selected\" data-difficulty=\"0.3\">提高</div>\r\n                    </div>\r\n                    <div v-else class=\"difficulty\" v-on:click=\"difficultyClick\">\r\n                        <div data-difficulty=\"0.8\">基础</div>\r\n                        <div data-difficulty=\"0.5\">巩固</div>\r\n                        <div data-difficulty=\"0.3\">提高</div>\r\n                    </div>\r\n                    <!--<span><i>&nbsp;</i>分值</span>-->\r\n                    <!--<input class=\"input\" type=\"text\" v-model=\"editingStem.score\">-->\r\n                </div>\r\n                <div class=\"edit-row\">\r\n                    <span><i>*</i>知识点</span>\r\n                    <div class=\"knowledge\">\r\n                        <template v-for=\"(knp,index) in editingStem.knpList\">\r\n                            <div >{{knp.knpName}}<img src=\"/images/delete.png\" style=\"float: right\"  alt=\"\" v-on:click=\"deleteKnp(index)\"></div>\r\n                        </template>\r\n                        <div class=\"add-knp\" style=\"padding-right: 10px\">添加</div>\r\n                    </div>\r\n                </div>\r\n                <div class=\"edit-row\">\r\n                    <span><i>*</i>题干</span>\r\n                    <div class=\"uEditor-area\">\r\n                        <script id=\"container1\" name=\"content\" type=\"text/plain\"></script>\r\n                    </div>\r\n                </div>\r\n\r\n                <div class=\"edit-row choose-answer\">\r\n                    <span><i>*</i>答案</span>\r\n                    <div class=\"answer\" id=\"selectAnswer\">\r\n                    </div>\r\n                </div>\r\n\r\n                <div class=\"edit-row blank-answer\">\r\n\r\n                    <span>&nbsp&nbsp答案</span>\r\n                    <div class=\"uEditor-area\">\r\n                        <script id=\"container2\" name=\"content\" type=\"text/plain\"></script>\r\n                    </div>\r\n                    <div>\r\n                        <span>高度</span>\r\n                        <input class=\"input\" type=\"text\" v-model=\"editingStem.height\">\r\n                    </div>\r\n\r\n                </div>\r\n\r\n                <div class=\"edit-save\" v-on:click=\"editSave\">保存</div>\r\n            </div>\r\n        </div>\r\n    </div>\r\n    <!--知识点-->\r\n    <div v-bind:class=\"{ none: hideKnpLayer, 'edit-layer':true, 'anim-opacity2': !hideKnpLayer, 'knp-layer' : true}\" id=\"KnpLayer\">\r\n        <div class=\"top\">\r\n            添加知识点\r\n            <div class=\"icon-close\" v-on:click=\"hideKnp\">\r\n                <img src=\"/images/close.png\" alt=\"\">\r\n            </div>\r\n        </div>\r\n        <div class=\"edit-wrap\">\r\n            <div class=\"edit-panel\">\r\n                <div class=\"selects\">\r\n                    <select class=\"select\" v-model=\"knpFilter.edition\" v-on:change=\"updateCourseBook\">\r\n                        <option value=\" \">选择教材版本</option>\r\n                        <option value=\"KX\">开心版</option>\r\n                        <option value=\"RJ\">人教版</option>\r\n                        <option value=\"BS\">北师大版</option>\r\n                        <option value=\"YW\">语文版</option>\r\n                        <option value=\"WY\">外研版</option>\r\n                        <option value=\"YH\">粤沪版</option>\r\n                        <option value=\"YJ\">粤教版</option>\r\n                        <option value=\"KY\">科粤版</option>\r\n                        <option value=\"ZT\">中图版</option>\r\n                        <option value=\"CJ\">川教版</option>\r\n                        <option value=\"XJ\">湘教版</option>\r\n                        <option value=\"YR\">粤人民版</option>\r\n                        <option value=\"QT\">其他（包含总复习、专项类书籍，此类书籍无教材版本限制）</option>\r\n                    </select>\r\n                    <select class=\"select\" v-model=\"knpFilter.cb\" v-on:change=\"updateCourseBook\">\r\n                        <option value=\" \">选择册别</option>\r\n                        <option value=\"01\">上册</option>\r\n                        <option value=\"02\">下册</option>\r\n                        <option value=\"03\">综合</option>\r\n                        <option value=\"04\">全一册</option>\r\n                    </select>\r\n                    <template v-if=\"courseBook && courseBook.length\">\r\n                        <select class=\"select\" v-on:change=\"updateChapters\" v-model=\"coursebookId\">\r\n                            <option value=\" \">选择教材</option>\r\n                            <option v-for=\"item in courseBook\" :value=\"item.textbookId\">{{item.name}}</option>\r\n                        </select>\r\n                    </template>\r\n                </div>\r\n                <div class=\"add-all\">\r\n                    <input style=\"margin-right:5px\" type=\"checkbox\" name=\"checkbox1\" value=\"true\" v-model=\"isAddAll\"/><span style=\"color: #ff920b\">其他题目同选一样的知识点</span> <span style=\"color: #c6c6c6\">(还没选择知识点的题目)</span>\r\n                </div>\r\n                <div class=\"add-all\">\r\n                    <input style=\"margin-right:5px;width: 456px\" type=\"text\"  v-model=\"searchText\"/>输入关键字搜索\r\n                    <!--<div class=\"search-btn\" v-on:click=\"searchKnp\">搜索</div>-->\r\n                </div>\r\n                <div class=\"chapter\" v-if=\"chapterListForRender\">\r\n                    <template v-for=\"item in chapterListForRender\">\r\n                            <div class=\"list level1\" :data-id=\"item.id\" v-bind:class=\"{fold: !item.unFold}\">\r\n                                <span class=\"level1\">{{item.name}}</span>\r\n\r\n                                <template v-for=\"item2 in item.son\">\r\n                                    <div class=\"list level2\" :data-id=\"item2.id\" v-bind:class=\"{fold: !item2.unFold}\">\r\n                                        <span class=\"level2\">{{item2.name}}</span>\r\n\r\n                                        <template v-for=\"item3 in item2.son\">\r\n                                            <div class=\"list level3\" :data-id=\"item3.id\" v-bind:class=\"{fold: !item3.unFold}\">\r\n                                                <span class=\"level3\">{{item3.name}}</span>\r\n\r\n                                                <template v-for=\"item4 in item3.son\" >\r\n                                                    <div class=\"list level4\" :data-id=\"item4.id\" v-bind:class=\"{fold: !item4.unFold}\">\r\n                                                        <span class=\"level4\">{{item4.name}}</span>\r\n                                                    </div>\r\n\r\n                                                    <template v-for=\"knp4 in item4.knpList\" v-bind:class=\"{selected: searchText && knp4.knpName.indexOf(searchText) > -1, chosen: selectedKplList.indexOf(JSON.stringify(knp4)) > -1}\">\r\n                                                        <div class=\"knp-checkbox\">\r\n                                                            <input type=\"checkbox\" name=\"checkbox1\" :value=\"JSON.stringify(knp4)\" v-model=\"selectedKplList\"/>{{knp4.knpName}}\r\n                                                        </div>\r\n                                                    </template>\r\n                                                </template>\r\n\r\n                                                <template v-for=\"knp3 in item3.knpList\">\r\n                                                    <div class=\"knp-checkbox\" v-bind:class=\"{selected: searchText && knp3.knpName.indexOf(searchText) > -1, chosen: selectedKplList.indexOf(JSON.stringify(knp3)) > -1}\">\r\n                                                        <input type=\"checkbox\" name=\"checkbox1\" :value=\"JSON.stringify(knp3)\" v-model=\"selectedKplList\"/>{{knp3.knpName}}\r\n                                                    </div>\r\n                                                </template>\r\n\r\n                                            </div>\r\n                                        </template>\r\n\r\n                                        <template v-for=\"knp2 in item2.knpList\" v-bind:class=\"{selected: searchText && knp2.knpName.indexOf(searchText) > -1, chosen: selectedKplList.indexOf(JSON.stringify(knp2)) > -1}\">\r\n                                            <div class=\"knp-checkbox\">\r\n                                                <input type=\"checkbox\" name=\"checkbox1\" :value=\"JSON.stringify(knp2)\" v-model=\"selectedKplList\"/>{{knp2.knpName}}\r\n                                            </div>\r\n                                        </template>\r\n\r\n                                    </div>\r\n                                </template>\r\n\r\n                                <template v-for=\"knp in item.knpList\" >\r\n                                    <div class=\"knp-checkbox\" v-bind:class=\"{selected: searchText && knp.knpName.indexOf(searchText) > -1 , chosen: selectedKplList.indexOf(JSON.stringify(knp)) > -1}\">\r\n                                        <input type=\"checkbox\" name=\"checkbox1\" :value=\"JSON.stringify(knp)\" v-model=\"selectedKplList\"/>{{knp.knpName}}\r\n                                    </div>\r\n                                </template>\r\n                            </div>\r\n                    </template>\r\n                </div>\r\n                <div class=\"no-knp\" v-else >暂无知识点，请重新选择教材！</div>\r\n\r\n            </div>\r\n            <div  class=\"save-wrapper\">\r\n                <div class=\"edit-save\" v-on:click=\"knpSave\">保存</div>\r\n            </div>\r\n\r\n        </div>\r\n\r\n    </div>\r\n    <!--添加上方文本-->\r\n    <div v-bind:class=\"{ none: hideAddShareLayer, 'edit-layer':true, 'anim-opacity2': !hideAddShareLayer}\" id=\"addShareLayer\">\r\n        <div class=\"top\">\r\n            编辑上方文本\r\n            <div class=\"icon-close\" v-on:click=\"hideAddShare\">\r\n                <img src=\"/images/close.png\" alt=\"\">\r\n            </div>\r\n        </div>\r\n        <div class=\"edit-wrap\">\r\n            <div class=\"edit-panel\">\r\n                <div class=\"edit-row\">\r\n                    <div class=\"uEditor-area\">\r\n                        <script id=\"container3\" name=\"content\" type=\"text/plain\"></script>\r\n                    </div>\r\n                </div>\r\n                <div class=\"edit-save\" v-on:click=\"addShareSave\">保存</div>\r\n            </div>\r\n        </div>\r\n\r\n    </div>\r\n\r\n</div>";
 
 	/***/
 },
-/* 15 */
+/* 11 */
 /***/function (module, exports) {
 
 	/**
@@ -4695,15 +4698,15 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 
 		/***/ };
 },
-/* 16 */
+/* 12 */
 /***/function (module, exports, __webpack_require__) {
 
 	/**
   * Created by jie on 2017/10/16.
   */
-	var tpl = __webpack_require__(17);
-	var store = __webpack_require__(7);
-	var util = __webpack_require__(15);
+	var tpl = __webpack_require__(13);
+	var store = __webpack_require__(2);
+	var util = __webpack_require__(11);
 	module.exports = {
 		template: tpl,
 		store: store,
@@ -4724,22 +4727,22 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 
 	/***/
 },
-/* 17 */
+/* 13 */
 /***/function (module, exports) {
 
 	module.exports = "<div>\r\n    <div class=\"none load4 load-container\">\r\n        <div class=\"loader\">Loading...</div>\r\n    </div>\r\n</div>";
 
 	/***/
 },
-/* 18 */
+/* 14 */
 /***/function (module, exports, __webpack_require__) {
 
 	/**
   * Created by jie on 2017/10/16.
   */
-	var tpl = __webpack_require__(19);
-	var store = __webpack_require__(7);
-	var util = __webpack_require__(15);
+	var tpl = __webpack_require__(15);
+	var store = __webpack_require__(2);
+	var util = __webpack_require__(11);
 	module.exports = {
 		template: tpl,
 		store: store,
@@ -4748,7 +4751,8 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 				display: '',
 				basic: false,
 				strenthen: false,
-				improve: false
+				improve: false,
+				selectionNums: 7
 			};
 		},
 		props: ['orderBy', 'isShowMarks'],
@@ -4756,10 +4760,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 			var that = this;
 			this.updateShow();
 		},
-		updated: function updated() {
-			//console.log('update!!')
-			//this.updateShow();
-		},
+		updated: function updated() {},
 
 		methods: {
 			updateShow: function updateShow() {
@@ -4770,16 +4771,6 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 				} else {
 					this.display = 'none';
 				}
-				//this.basic = false;
-				//this.strenthen = false;
-				//this.improve = false;
-				//if (difficulty == 0.8) {
-				//    this.basic = true
-				//} else if(difficulty == 0.5){
-				//    this.strenthen = true
-				//} else if(difficulty == 0.3) {
-				//    this.improve  = true
-				//}
 			},
 			typeChange: function typeChange() {
 				//console.log(this.orderBy, 'change')
@@ -4877,6 +4868,19 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 		computed: {
 			editingStem: function editingStem() {
 				return $.extend({}, this.$store.state.qListForRender[this.orderBy - 1]);
+			},
+			selectionArr: function selectionArr() {
+				var arr = {};
+
+				if (this.selectionNums) {
+					arr['0'] = '选项个数';
+					var i = 2;
+					while (i <= this.selectionNums) {
+						arr[i] = i;
+						i++;
+					}
+				}
+				return arr;
 			}
 		},
 		watch: {}
@@ -4884,20 +4888,20 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 
 	/***/
 },
-/* 19 */
+/* 15 */
 /***/function (module, exports) {
 
-	module.exports = "<div :data-index=\"orderBy\" class=\"edit-item animate-show\">\r\n    <div class=\"edit-row\">\r\n        <strong>第{{orderBy}}题</strong>\r\n        <div class=\"inline\">\r\n            <span><i>*</i>题型</span>\r\n            <select v-model=\"editingStem.qtypeInner\" class=\"select\" v-on:change=\"typeChange\">\r\n                <option value=\"null\">选择题型</option>\r\n                <option value=\"1\">单选题</option>\r\n                <option value=\"2\">多选题</option>\r\n                <option value=\"3\">填空题</option>\r\n                <option value=\"4\">简答题</option>\r\n            </select>\r\n        </div>\r\n\r\n        <div class=\"inline\" v-if=\"editingStem.qtypeInner==1||editingStem.qtypeInner==2\">\r\n            <span><i>*</i>选项</span>\r\n            <select v-model=\"editingStem.answerCount\" class=\"select\" v-on:change=\"change\">\r\n                <option value=\"2\">2</option>\r\n                <option value=\"3\">3</option>\r\n                <option value=\"4\">4</option>\r\n                <option value=\"5\">5</option>\r\n                <option value=\"0\">选项个数</option>\r\n            </select>\r\n        </div>\r\n    </div>\r\n\r\n    <div class=\"edit-row\">\r\n\r\n        <span><i>*</i>难度</span>\r\n        <div v-if=\"editingStem.difficulty==0.8\" class=\"difficulty\" v-on:click=\"difficultyClick\">\r\n            <div class=\"selected\" data-difficulty=\"0.8\">基础</div>\r\n            <div data-difficulty=\"0.5\">巩固</div>\r\n            <div data-difficulty=\"0.3\">提高</div>\r\n        </div>\r\n        <div v-else-if=\"editingStem.difficulty==0.5\" class=\"difficulty\" v-on:click=\"difficultyClick\">\r\n            <div data-difficulty=\"0.8\">基础</div>\r\n            <div class=\"selected\" data-difficulty=\"0.5\">巩固</div>\r\n            <div data-difficulty=\"0.3\">提高</div>\r\n        </div>\r\n        <div v-else-if=\"editingStem.difficulty==0.3\" class=\"difficulty\" v-on:click=\"difficultyClick\">\r\n            <div data-difficulty=\"0.8\">基础</div>\r\n            <div data-difficulty=\"0.5\">巩固</div>\r\n            <div class=\"selected\" data-difficulty=\"0.3\">提高</div>\r\n        </div>\r\n        <div v-else class=\"difficulty\" v-on:click=\"difficultyClick\">\r\n            <div data-difficulty=\"0.8\">基础</div>\r\n            <div data-difficulty=\"0.5\">巩固</div>\r\n            <div data-difficulty=\"0.3\">提高</div>\r\n        </div>\r\n\r\n    <template v-if=\"isShowMarks\">\r\n        <span><i>&nbsp</i>分值</span>\r\n        <input class=\"input\" type=\"text\" v-model=\"editingStem.score\" v-on:change=\"change\">\r\n    </template>\r\n    </div>\r\n    <div class=\"edit-row\">\r\n        <span><i>*</i>知识点</span>\r\n        <div class=\"knowledge\">\r\n            <div class=\"wrap\">\r\n\r\n                <template v-for=\"(item,index) in editingStem.knpList\" >\r\n                    <div class=\"item\" >{{item.knpName}}<img style=\"float: right;\" src=\"/images/delete.png\" alt=\"\" v-on:click=\"deleteKnp(index)\"></div>\r\n                </template>\r\n                <div v-on:click=\"knpEdit\" class=\"item add\">\r\n                    <img  src=\"/images/add.png\" alt=\"\" >\r\n                </div>\r\n            </div>\r\n        </div>\r\n    </div>\r\n    <div class=\"edit-row\">\r\n        <span><i v-if=\"editingStem.qtypeInner == 1 || editingStem.qtypeInner == 2\">*</i>答案</span>\r\n        <template v-if=\"editingStem.qtypeInner == 1 || editingStem.qtypeInner == 2\">\r\n        <div class=\"answer answer-tag\" v-on:click=\"answerClick\">\r\n            <template v-for=\"selection in editingStem.answerCountArray\">\r\n                <div  v-if=\"editingStem.answer.indexOf(selection)!=-1\" class=\"answer-item selected\">{{selection}}</div>\r\n                <div  v-if=\"editingStem.answer.indexOf(selection) == -1\" class=\"answer-item\">{{selection}}</div>\r\n            </template>\r\n        </div>\r\n        </template>\r\n        <template v-if=\"editingStem.qtypeInner != 1 && editingStem.qtypeInner != 2\">\r\n            <span class=\"short-answer\" v-if=\"editingStem.answer\">{{editingStem.answer | textlize}}</span>\r\n            <span v-else class=\"add-answer\" v-on:click=\"edit\"><img src=\"/images/add2.png\" alt=\"\"> 添加答案 </span>\r\n            <!--<span class=\"short-answer\" v-if=\"!editingStem.answer\">{{editingStem.answer | textlize}}</span>-->\r\n        </template>\r\n        <div class=\"edit-link\" v-on:click=\"edit\">\r\n            【编辑题目】\r\n        </div>\r\n    </div>\r\n</div>\r\n";
+	module.exports = "<div :data-index=\"orderBy\" class=\"edit-item animate-show\">\r\n    <div class=\"edit-row\">\r\n        <strong>第{{orderBy}}题</strong>\r\n        <div class=\"inline\">\r\n            <span><i>*</i>题型</span>\r\n            <select v-model=\"editingStem.qtypeInner\" class=\"select\" v-on:change=\"typeChange\">\r\n                <option value=\"null\">选择题型</option>\r\n                <option value=\"1\">单选题</option>\r\n                <option value=\"2\">多选题</option>\r\n                <option value=\"3\">填空题</option>\r\n                <option value=\"4\">简答题</option>\r\n            </select>\r\n        </div>\r\n\r\n        <div class=\"inline\" v-if=\"editingStem.qtypeInner==1||editingStem.qtypeInner==2\">\r\n            <span><i>*</i>选项</span>\r\n            <select v-model=\"editingStem.answerCount\" class=\"select\" v-on:change=\"change\">\r\n                <template v-for=\"item,key in selectionArr\">\r\n                    <option :value=\"key\">{{item}}</option>\r\n                </template>\r\n            </select>\r\n        </div>\r\n    </div>\r\n\r\n    <div class=\"edit-row\">\r\n\r\n        <span><i>*</i>难度</span>\r\n        <div v-if=\"editingStem.difficulty==0.8\" class=\"difficulty\" v-on:click=\"difficultyClick\">\r\n            <div class=\"selected\" data-difficulty=\"0.8\">基础</div>\r\n            <div data-difficulty=\"0.5\">巩固</div>\r\n            <div data-difficulty=\"0.3\">提高</div>\r\n        </div>\r\n        <div v-else-if=\"editingStem.difficulty==0.5\" class=\"difficulty\" v-on:click=\"difficultyClick\">\r\n            <div data-difficulty=\"0.8\">基础</div>\r\n            <div class=\"selected\" data-difficulty=\"0.5\">巩固</div>\r\n            <div data-difficulty=\"0.3\">提高</div>\r\n        </div>\r\n        <div v-else-if=\"editingStem.difficulty==0.3\" class=\"difficulty\" v-on:click=\"difficultyClick\">\r\n            <div data-difficulty=\"0.8\">基础</div>\r\n            <div data-difficulty=\"0.5\">巩固</div>\r\n            <div class=\"selected\" data-difficulty=\"0.3\">提高</div>\r\n        </div>\r\n        <div v-else class=\"difficulty\" v-on:click=\"difficultyClick\">\r\n            <div data-difficulty=\"0.8\">基础</div>\r\n            <div data-difficulty=\"0.5\">巩固</div>\r\n            <div data-difficulty=\"0.3\">提高</div>\r\n        </div>\r\n\r\n    <template v-if=\"isShowMarks\">\r\n        <span><i>&nbsp</i>分值</span>\r\n        <input class=\"input\" type=\"text\" v-model=\"editingStem.score\" v-on:change=\"change\">\r\n    </template>\r\n    </div>\r\n    <div class=\"edit-row\">\r\n        <span><i>*</i>知识点</span>\r\n        <div class=\"knowledge\">\r\n            <div class=\"wrap\">\r\n\r\n                <template v-for=\"(item,index) in editingStem.knpList\" >\r\n                    <div class=\"item\" >{{item.knpName}}<img style=\"float: right;\" src=\"/images/delete.png\" alt=\"\" v-on:click=\"deleteKnp(index)\"></div>\r\n                </template>\r\n                <div v-on:click=\"knpEdit\" class=\"item add\">\r\n                    <img  src=\"/images/add.png\" alt=\"\" >\r\n                </div>\r\n            </div>\r\n        </div>\r\n    </div>\r\n    <div class=\"edit-row\">\r\n        <span><i v-if=\"editingStem.qtypeInner == 1 || editingStem.qtypeInner == 2\">*</i>答案</span>\r\n        <template v-if=\"editingStem.qtypeInner == 1 || editingStem.qtypeInner == 2\">\r\n        <div class=\"answer answer-tag\" v-on:click=\"answerClick\">\r\n            <template v-for=\"selection in editingStem.answerCountArray\">\r\n                <div  v-if=\"editingStem.answer.indexOf(selection)!=-1\" class=\"answer-item selected\">{{selection}}</div>\r\n                <div  v-if=\"editingStem.answer.indexOf(selection) == -1\" class=\"answer-item\">{{selection}}</div>\r\n            </template>\r\n        </div>\r\n        </template>\r\n        <template v-if=\"editingStem.qtypeInner != 1 && editingStem.qtypeInner != 2\">\r\n            <span class=\"short-answer\" v-if=\"editingStem.answer\">{{editingStem.answer | textlize}}</span>\r\n            <span v-else class=\"add-answer\" v-on:click=\"edit\"><img src=\"/images/add2.png\" alt=\"\"> 添加答案 </span>\r\n            <!--<span class=\"short-answer\" v-if=\"!editingStem.answer\">{{editingStem.answer | textlize}}</span>-->\r\n        </template>\r\n        <div class=\"edit-link\" v-on:click=\"edit\">\r\n            【编辑题目】\r\n        </div>\r\n    </div>\r\n</div>\r\n";
 
 	/***/
 },
-/* 20 */
+/* 16 */
 /***/function (module, exports, __webpack_require__) {
 
-	var store = __webpack_require__(7);
-	var tpl = __webpack_require__(21);
-	var loadingLayer = __webpack_require__(16);
-	var getPageInfo = __webpack_require__(22);
+	var store = __webpack_require__(2);
+	var tpl = __webpack_require__(17);
+	var loadingLayer = __webpack_require__(12);
+	var getPageInfo = __webpack_require__(18);
 	var pdfHost = window.pdfHost || 'http://211.159.185.181:8180';
 	var formData = new FormData();
 	function generatePdf() {
@@ -5005,14 +5009,14 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 
 	/***/
 },
-/* 21 */
+/* 17 */
 /***/function (module, exports) {
 
 	module.exports = "<div>\r\n    <!--步骤栏-->\r\n    <div class=\"top-bar\">\r\n        <div class=\"box\">第1步：新建作业 </div>\r\n        <div class=\"arrow current\"></div>\r\n\r\n        <div class=\"box\">第2步：作业编辑 </div>\r\n        <div class=\"arrow current\"></div>\r\n\r\n        <div class=\"box current\">第3步：作业预览 </div>\r\n        <div class=\"arrow \"></div>\r\n\r\n        <div class=\"box \">第4步：生成作业</div>\r\n    </div>\r\n    <!--预览区域-->\r\n    <div class=\"preview-area\">\r\n        <div class=\"page-Wrap\" v-html=\"previewHtml\">\r\n\r\n        </div>\r\n    </div>\r\n    <loading-layer></loading-layer>\r\n    <div class=\"preview-bar \">\r\n        <div class=\"preview-btn back\">返回修改</div>\r\n        <div class=\"preview-btn generate\">生成作业</div>\r\n    </div>\r\n</div>";
 
 	/***/
 },
-/* 22 */
+/* 18 */
 /***/function (module, exports) {
 
 	/**
@@ -5266,11 +5270,11 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 
 	/***/
 },
-/* 23 */
+/* 19 */
 /***/function (module, exports, __webpack_require__) {
 
-	var store = __webpack_require__(7);
-	var tpl = __webpack_require__(24);
+	var store = __webpack_require__(2);
+	var tpl = __webpack_require__(20);
 
 	module.exports = {
 		template: tpl,
@@ -5306,7 +5310,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 
 	/***/
 },
-/* 24 */
+/* 20 */
 /***/function (module, exports) {
 
 	module.exports = "<div>\r\n    <!--步骤栏-->\r\n    <div class=\"top-bar\">\r\n        <div class=\"box\">第1步：新建作业 </div>\r\n        <div class=\"arrow current\"></div>\r\n\r\n        <div class=\"box\">第2步：作业编辑 </div>\r\n        <div class=\"arrow current\"></div>\r\n\r\n        <div class=\"box \">第3步：作业预览 </div>\r\n        <div class=\"arrow current\"></div>\r\n\r\n        <div class=\"box current\">第4步：生成作业</div>\r\n    </div>\r\n    <div class=\"success\">生成成功!</div>\r\n    <div class=\"preview-bar \">\r\n        <div class=\"preview-btn backList\">返回作业列表</div>\r\n        <!--<div class=\"preview-btn dispatch\">布置作业</div>-->\r\n        <div class=\"preview-btn download\">下载pdf</div>\r\n    </div>\r\n</div>";

@@ -17,7 +17,8 @@ module.exports = {
             coursebookId: ' ',
             selectedKplList: [],
             isAddAll:false,
-            searchText:''
+            searchText:'',
+            selectionNums:7
         }
     },
     mounted(){
@@ -38,18 +39,12 @@ module.exports = {
                 initialFrameHeight: 300
             });
         $('.chapter')
-        //.on('click', function (e) {
-        //    $(this).toggleClass('fold')
-        //    e.stopPropagation();
-        //})
             .on('click', '.list', function (e) {
                 var id = $(this).attr('data-id');
                 console.log(id)
                 if (id) {
                     $(this).toggleClass('fold')
-
                 }
-                //that.$store.dispatch('GET_KNPLIST',id);
                 e.stopPropagation();
 
             });
@@ -453,6 +448,19 @@ module.exports = {
         qListForRender () {
             return this.$store.state.qListForRender
         },
+        selectionArr(){
+            var arr = {};
+            if(this.selectionNums){
+                arr['0'] = '选项个数';
+                var i = 2;
+                while (i<=this.selectionNums) {
+                    arr[i] = i;
+                    i++
+                }
+
+            }
+            return arr;
+        }
     },
     watch: {
         editingStem: function () {

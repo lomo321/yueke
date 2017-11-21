@@ -29,11 +29,9 @@
                     <div class="inline" v-if="addModel.qtypeInner == 1 || addModel.qtypeInner == 2">
                         <span><i>*</i>选项</span>
                         <select v-model="addModel.answerCount" class="select">
-                            <option value="">选项个数</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                            <option value="4">4</option>
-                            <option value="5">5</option>
+                            <template v-for="item,key in selectionArr">
+                                <option :value="key">{{item}}</option>
+                            </template>
                         </select>
                     </div>
                 </div>
