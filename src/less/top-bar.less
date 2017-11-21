@@ -1,0 +1,39 @@
+.top-bar{
+  box-sizing: border-box;
+  width: 100%;
+  border: 1px solid #57adde;
+  height: 40px;
+  line-height: 40px;
+  background: white;
+  text-align: center;
+
+  font-size: 14px;
+  font-family: 'Arial Normal', 'Arial';
+  font-weight: 400;
+  font-style: normal;
+  color: #57adde;
+
+  margin-bottom: 25px;
+  display: flex;
+  div.box {
+    flex:1;
+    &.current{
+      background: #57adde;
+      color: white;
+    }
+  }
+  div.arrow{
+    font-size: 0;
+    line-height: 0;
+    border-width: 19px;
+    border-right-width: 0;
+    border-style: dashed;
+    border-left-style: solid;
+    border-top-color: transparent;
+    border-bottom-color: transparent;
+    &.current{
+      border-color: white;
+
+    }
+  }
+}
