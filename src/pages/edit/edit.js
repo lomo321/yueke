@@ -303,7 +303,9 @@ module.exports = {
                             //否则跨页题号要删掉
                             $clone.find('.orderBy').remove();
                             //超高了，但是还残留了题干在该页，记录题目位置用于更新编辑区域位置
-                            that.editPosition[order] = $v.find('.orderBy').offset().top
+                            if($v.find('.orderBy').length && $v.find('.orderBy').offset()) {
+                                that.editPosition[order] = $v.find('.orderBy').offset().top
+                            }
                         }
                         buffer.push($clone)
                     } else {
