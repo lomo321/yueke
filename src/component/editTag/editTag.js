@@ -105,7 +105,7 @@ module.exports = {
         },
         commitChange: function () {
             util.log(this.editingStem)
-            this.showLoading();
+            //this.showLoading();
             this.$store.dispatch('EDIT_SAVE', this.editingStem)
         },
         edit: function () {

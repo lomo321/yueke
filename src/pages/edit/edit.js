@@ -372,6 +372,9 @@ module.exports = {
             this.qListForRender.forEach(function (v) {
                 msg = msg + ( that.checkQuestion(v) ? '\n' + that.checkQuestion(v) : '')
             });
+            if(!this.qListForRender.length) {
+                msg = '您需要添加题目，您的答题卡还没有内容'
+            }
             if (msg) {
                 window.confirm(msg)
             } else if (this.isShowMarks && (this.totalMark != 100 && this.totalMark != 120 && this.totalMark != 150)) {

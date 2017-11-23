@@ -129,6 +129,12 @@ module.exports = {
             } else {
                 this.editingStem.knpList = knpArr
             }
+            this.editingStem.stem = ue.getContent();
+            if (this.editingStem.qtypeInner == 1 || this.editingStem.qtypeInner == 2) {
+            } else {
+                this.editingStem.answer = ue2.getContent();
+                this.editingStem.answerCount = '';
+            }
             this.showLoading();
             this.$store.dispatch('EDIT_SAVE', this.editingStem)
             this.hideKnp();
@@ -233,6 +239,7 @@ module.exports = {
         editTypeChange: function () {
             var type = this.editingStem.qtypeInner;
             if (type == 1 || type == 2) {
+                this.selectNumChange();
                 $('.options').css({
                     display: ''
                 })
@@ -242,6 +249,7 @@ module.exports = {
                 $('.blank-answer').css({
                     display: 'none'
                 })
+
             } else {
                 $('.options').css({
                     display: 'none'

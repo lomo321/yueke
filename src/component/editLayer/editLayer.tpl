@@ -78,14 +78,11 @@
                     <div class="inline options">
                         <span><i>*</i>选项</span>
                         <select v-model="editingStem.answerCount" class="select" v-on:change="selectNumChange">
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                            <option value="4">4</option>
-                            <option value="5">5</option>
-                            <option value="0">选项个数</option>
+                            <template v-for="item,key in selectionArr">
+                                <option :value="key">{{item}}</option>
+                            </template>
                         </select>
                     </div>
-
                 </div>
                 <div class="edit-row">
                     <span><i>*</i>难度</span>
@@ -281,5 +278,4 @@
         </div>
 
     </div>
-
 </div>
