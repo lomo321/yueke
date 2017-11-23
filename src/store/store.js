@@ -50,7 +50,8 @@ const store = new Vuex.Store({
         showLoadingLayer:false,
         downloadLink:'',
         addModel:{},
-        knpList:[]
+        knpList:[],
+        scrollTop:0
     },
     actions: {
         /**
@@ -324,6 +325,9 @@ const store = new Vuex.Store({
         },
         SET_DOWNLOAD_LINK:(state,url)=>{
             state.downloadLink = url
+        },
+        SET_SCROLL_TOP:(state,scrollTop) => {
+            state.scrollTop = scrollTop || 0;
         },
         CHANGE_ORDER_UP:(state,order) => {
             var temp = state.orderInfomation[order - 1]

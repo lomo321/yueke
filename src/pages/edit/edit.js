@@ -159,6 +159,7 @@ module.exports = {
             that.updateEdit();
             that.updatePageNum();
             that.hideLoading();
+            $("body,html").scrollTop(this.scrollTop);
         }
     },
     methods: {
@@ -372,8 +373,8 @@ module.exports = {
             this.qListForRender.forEach(function (v) {
                 msg = msg + ( that.checkQuestion(v) ? '\n' + that.checkQuestion(v) : '')
             });
-            if(!this.qListForRender.length) {
-                msg = '您需要添加题目，您的答题卡还没有内容'
+            if(!this.qListForRender.length ) {
+                msg = that.bookInfo.cardFormat == 2 ? '您的答题卡还没有内容' : '您需要添加题目'
             }
             if (msg) {
                 window.confirm(msg)
@@ -609,6 +610,9 @@ module.exports = {
                 return ''
 
             }
+        },
+        scrollTop(){
+            return this.$store.state.scrollTop;
         }
     },
     watch: {},

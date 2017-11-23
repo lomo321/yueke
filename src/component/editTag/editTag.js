@@ -106,6 +106,7 @@ module.exports = {
         commitChange: function () {
             util.log(this.editingStem)
             //this.showLoading();
+            this.$store.commit('SET_SCROLL_TOP',document.body.scrollTop);
             this.$store.dispatch('EDIT_SAVE', this.editingStem)
         },
         edit: function () {
