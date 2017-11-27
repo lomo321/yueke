@@ -38,16 +38,16 @@ module.exports = {
                 elementPathEnabled: false,
                 initialFrameHeight: 300
             });
-        $('.chapter')
-            .on('click', '.list', function (e) {
-                var id = $(this).attr('data-id');
-                console.log(id)
-                if (id) {
-                    $(this).toggleClass('fold')
-                }
-                e.stopPropagation();
+        // $('.chapter')
+        //     .on('click', '.list', function (e) {
+        //         var id = $(this).attr('data-id');
+        //         console.log(id)
+        //         if (id) {
+        //             $(this).toggleClass('fold')
+        //         }
+        //         e.stopPropagation();
 
-            });
+        //     });
         $('.add-knp')
             .on('click', function () {
                 that.showKnp();
@@ -61,6 +61,9 @@ module.exports = {
                     $(this).toggleClass('selected');
                 }
             })
+        $('#KnpLayer').on('click','.list',function(){
+            $(this).toggleClass('fold');
+        })
     },
     updated: function () {
         $('.knp-checkbox').on('click', function (e) {

@@ -231,8 +231,8 @@
                                             </div>
                                         </template>
 
-                                        <template v-for="knp2 in item2.knpList" v-bind:class="{selected: searchText && knp2.knpName.indexOf(searchText) > -1, chosen: selectedKplList.indexOf(JSON.stringify(knp2)) > -1}">
-                                            <div class="knp-checkbox">
+                                        <template v-for="knp2 in item2.knpList">
+                                            <div class="knp-checkbox" v-bind:class="{selected: searchText && knp2.knpName.indexOf(searchText) > -1, chosen: selectedKplList.indexOf(JSON.stringify(knp2)) > -1}">
                                                 <input type="checkbox" name="checkbox1" :value="JSON.stringify(knp2)" v-model="selectedKplList"/>{{knp2.knpName}}
                                             </div>
                                         </template>

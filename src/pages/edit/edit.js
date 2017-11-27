@@ -78,6 +78,7 @@ module.exports = {
             })
             .on('click', function () {
                 $(this).addClass('none')
+                that.$store.commit('SET_SCROLL_TOP',that.getScrollTop());
                 that.$store.commit('SHOW_LOADING');
 
             })
@@ -163,6 +164,13 @@ module.exports = {
         }
     },
     methods: {
+        getScrollTop:function(){
+            if(document.documentElement.scrollTop) {
+                return document.documentElement.scrollTop
+            } else {
+                return document.body.scrollTop
+            }
+        },
         /**
          * 更新渲染的页面
          */

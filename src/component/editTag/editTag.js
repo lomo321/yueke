@@ -25,6 +25,13 @@ module.exports = {
 
     },
     methods: {
+        getScrollTop:function(){
+            if(document.documentElement.scrollTop) {
+                return document.documentElement.scrollTop
+            } else {
+                return document.body.scrollTop
+            }
+        },
         updateShow: function () {
             var type = this.editingStem.qtypeInner;
             var difficulty = this.editingStem.difficulty;
@@ -106,13 +113,14 @@ module.exports = {
         commitChange: function () {
             util.log(this.editingStem)
             //this.showLoading();
-            this.$store.commit('SET_SCROLL_TOP',document.body.scrollTop);
+            this.$store.commit('SET_SCROLL_TOP',this.getScrollTop());
             this.$store.dispatch('EDIT_SAVE', this.editingStem)
         },
         edit: function () {
             this.$emit('editLinkClick')
         },
         knpEdit: function () {
+            this.$store.commit('SET_SCROLL_TOP',this.getScrollTop());
             this.$emit('knpLinkClick')
         },
         showLoading: function () {

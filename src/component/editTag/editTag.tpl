@@ -55,7 +55,6 @@
         <span><i>*</i>知识点</span>
         <div class="knowledge">
             <div class="wrap">
-
                 <template v-for="(item,index) in editingStem.knpList" >
                     <div class="item" >{{item.knpName}}<img style="float: right;" src="/images/delete.png" alt="" v-on:click="deleteKnp(index)"></div>
                 </template>
