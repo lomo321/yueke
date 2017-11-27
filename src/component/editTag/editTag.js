@@ -13,13 +13,16 @@ module.exports = {
             basic: false,
             strenthen: false,
             improve: false,
-            selectionNums:7
+            selectionNums:7,
         }
     },
     props: ['orderBy', 'isShowMarks'],
     mounted(){
         var that = this;
         this.updateShow();
+        // console.log(this.editingStem.knpList)
+        // console.log(this.editingStem.knpList[0].knpName)
+        
     },
     updated(){
 

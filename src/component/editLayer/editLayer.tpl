@@ -197,6 +197,7 @@
                     <input style="margin-right:5px;width: 456px" type="text"  v-model="searchText"/>输入关键字搜索
                     <!--<div class="search-btn" v-on:click="searchKnp">搜索</div>-->
                 </div>
+                
                 <div class="chapter" v-if="chapterListForRender">
                     <template v-for="item in chapterListForRender">
                             <div class="list level1" :data-id="item.id" v-bind:class="{fold: !item.unFold}">
@@ -213,13 +214,14 @@
                                                 <template v-for="item4 in item3.son" >
                                                     <div class="list level4" :data-id="item4.id" v-bind:class="{fold: !item4.unFold}">
                                                         <span class="level4">{{item4.name}}</span>
+                                                        <template v-for="knp4 in item4.knpList" >
+                                                            <div class="knp-checkbox" v-bind:class="{selected: searchText && knp4.knpName.indexOf(searchText) > -1, chosen: selectedKplList.indexOf(JSON.stringify(knp4)) > -1}">
+                                                                <input type="checkbox" name="checkbox1" :value="JSON.stringify(knp4)" v-model="selectedKplList"/>{{knp4.knpName}}
+                                                            </div>
+                                                        </template>
                                                     </div>
 
-                                                    <template v-for="knp4 in item4.knpList" >
-                                                        <div class="knp-checkbox" v-bind:class="{selected: searchText && knp4.knpName.indexOf(searchText) > -1, chosen: selectedKplList.indexOf(JSON.stringify(knp4)) > -1}">
-                                                            <input type="checkbox" name="checkbox1" :value="JSON.stringify(knp4)" v-model="selectedKplList"/>{{knp4.knpName}}
-                                                        </div>
-                                                    </template>
+                                                    
                                                 </template>
 
                                                 <template v-for="knp3 in item3.knpList">

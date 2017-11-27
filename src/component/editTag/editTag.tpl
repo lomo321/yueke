@@ -56,8 +56,11 @@
         <div class="knowledge">
             <div class="wrap">
                 <template v-for="(item,index) in editingStem.knpList" >
-                    <div class="item" >{{item.knpName}}<img style="float: right;" src="/images/delete.png" alt="" v-on:click="deleteKnp(index)"></div>
+                    <div class="item">{{item.knpName}}<img style="float: right;" src="/images/delete.png" alt="" v-on:click="deleteKnp(index)"></div>                  
                 </template>
+                <div  v-on:click="edit" class="item more">
+                    更多
+                </div>
                 <div v-on:click="knpEdit" class="item add">
                     <img  src="/images/add.png" alt="" >
                 </div>

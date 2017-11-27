@@ -130,12 +130,17 @@
       .knowledge{
         display: inline-block;
         margin-left: 15px;
-        margin-right: 66px;//can change
-        width: 320px;
-        overflow: auto;
+        // margin-right: 66px;//can change
+        // width: 320px;
+        width: 380px;
+        // padding-right:90px;
+        // overflow: auto;
+        overflow: hidden;
         height: 100%;
         div.wrap{
           height: 30px;
+          display: inline-block; 
+          max-width: 312px;   
         }
         div.item{
           display: inline-block;
@@ -150,6 +155,7 @@
           padding: 0 0 0 10px;
           margin-right: 5px;
           overflow: hidden;
+          float:left;
           &:hover{
             cursor:pointer;
           }
@@ -157,11 +163,18 @@
             padding: 0;
             border: none;
             background: #57adde;
+            position: absolute;
+            right:5px;
             img{
               width: 30px;
               height: 30px;
               margin-left: 0;
             }
+          }
+          &.more{
+            padding-right: 10px;
+            position:absolute;
+            right:40px;
           }
         }
         img {

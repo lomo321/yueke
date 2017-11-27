@@ -207,7 +207,7 @@
         .list{
           //height: 50px;
           border-top: 1px solid grey;
-
+          position: relative;
           width: 100%;
           //border: 1px solid grey;
           background: #e0e0e0;
@@ -216,6 +216,31 @@
             div{
               display: none;
             }
+            &::before{
+              content: '';
+              width: 0;
+              height: 0;
+              border-left: 10px solid transparent;
+              border-right: 10px solid transparent;
+              border-bottom: 10px solid #ccc;
+              border-top: 0;
+              position: absolute;
+              right: 15px;
+              top: 50%;
+              margin-top: -5px;
+            }
+          }
+          &::before{
+            content: '';
+            width: 0;
+            height: 0;
+            border-left: 10px solid transparent;
+            border-right: 10px solid transparent;
+            border-top: 10px solid #ccc;
+            border-bottom:0;
+            position: absolute;
+            right: 15px;
+            top: 20px;
           }
           &:hover{
             cursor: pointer;

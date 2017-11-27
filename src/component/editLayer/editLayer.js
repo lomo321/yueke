@@ -360,7 +360,7 @@ module.exports = {
         courseBook(){
             return this.$store.state.courseBook
         },
-        chapterList(){
+        chapterList(){        
             console.log(JSON.stringify(this.$store.state.chapterList))
             return this.$store.state.chapterList
         },
@@ -393,7 +393,7 @@ module.exports = {
                             v.son = [];
                             level1 = level1 ? level1 :{};
                             level1[v.id] = v;
-                            v.knpList = [];
+                            // v.knpList = [];
                             break;
                         case 2:
                             v.son = [];
@@ -420,7 +420,8 @@ module.exports = {
                         if(v.unFold) {
                             level3[parentId].unFold = true;
                         }
-                        level3[parentId].son.push(v)
+                        level3[parentId].son.push(v);
+                        level3[parentId].knpList = [];
                     }
                 });
                 level3 && $.each(level3, function (i, v) {
@@ -430,7 +431,8 @@ module.exports = {
                         if(v.unFold) {
                             level2[parentId].unFold = true;
                         }
-                        level2[parentId].son.push(v)
+                        level2[parentId].son.push(v);
+                        level2[parentId].knpList = [];
                     }
                 });
                 level2 && $.each(level2, function (i, v) {
@@ -440,9 +442,13 @@ module.exports = {
                     }
 
                     if (parentId && level1[parentId]) {
-                        level1[parentId].son.push(v)
+                        level1[parentId].son.push(v);
+                        level1[parentId].knpList = [];
                     }
                 });
+
+                console.log('测试');
+                console.log(JSON.stringify(level1));
 
                 return level1
             }
