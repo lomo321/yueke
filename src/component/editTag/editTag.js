@@ -39,13 +39,17 @@ module.exports = {
             var wrapperWidth = 0;//容器宽
             var overWidth = false;//是否超宽
             $.each($items, function (i,item) {
-                if(widthin + $(item).width() > 285 ) {
-                    $(item).addClass('hide');
-                    overWidth = true;
+                if(!overWidth) {
+                    if(widthin + $(item).width() > 285 ) {
+                        $(item).addClass('hide');
+                        overWidth = true;
+                    } else {
+                        widthin = widthin + $(item).width();
+                    }
+                    wrapperWidth = widthin;
                 } else {
-                    widthin = widthin + $(item).width();
+                    $(item).addClass('hide');
                 }
-                wrapperWidth = widthin;
             });
             $(this.$el).find('.wrap').css('width',(wrapperWidth > 0 ? wrapperWidth + 10  + 'px' :''));
             $(this.$el).find('.mechianmore').css('display', overWidth ? 'inline-block' : 'none');
