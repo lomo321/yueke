@@ -35,19 +35,20 @@ module.exports = {
             var wrapperWidth = 0;//容器宽
             var overWidth = false;//是否超宽
             $.each($items, function (i,item) {
+                $(item).removeClass('hide');
                 if(!overWidth) {
-                    if(widthin + $(item).width() > 285 ) {
+                    if(widthin + $(item).width() + 6 > 285 ) { //+6因为要算上margin宽度
                         $(item).addClass('hide');
                         overWidth = true;
                     } else {
-                        widthin = widthin + $(item).width();
+                        widthin = widthin + $(item).width() + 6;
                     }
                     wrapperWidth = widthin;
                 } else {
                     $(item).addClass('hide');
                 }
             });
-            $(this.$el).find('.wrap').css('width',(wrapperWidth > 0 ? wrapperWidth + 10  + 'px' :''));
+            $(this.$el).find('.wrap').css('width',(wrapperWidth > 0 ? wrapperWidth  + 'px' :''));
             $(this.$el).find('.mechianmore').css('display', overWidth ? 'inline-block' : 'none');
         },
 
