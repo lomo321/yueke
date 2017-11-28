@@ -13,23 +13,60 @@ module.exports = {
             basic: false,
             strenthen: false,
             improve: false,
-            selectionNums:7,
+            selectionNums: 7
         }
     },
     props: ['orderBy', 'isShowMarks'],
-    mounted(){
+    mounted() {
         var that = this;
-        this.updateShow();
-        // console.log(this.editingStem.knpList)
-        // console.log(this.editingStem.knpList[0].knpName)
+        this.updateShow();                        
+        that.pointshoworhide(); //计算知识点宽度控制显示/隐藏
         
     },
-    updated(){
+    updated() {
 
     },
     methods: {
-        getScrollTop:function(){
-            if(document.documentElement.scrollTop) {
+        //计算知识点宽度控制显示/隐藏
+        pointshoworhide: function () {
+            var that = this;
+            var $pointbigbox = $('.pointbigbox'); //知识点大块
+
+            for (var j = 0; j < $pointbigbox.length; j++) {
+                var target = $pointbigbox.eq(j); //循环一组大题对象
+                var $item = target.find('.itemid');//读取的知识点值
+                // console.log('j:' + j + '   $item.length:' + $item.length)
+                var widthin = 0; //初始化宽度为0
+                for (var i = 0; i < $item.length; i++) {
+                    
+                    widthin = widthin + $item.eq(i).width(); //循环计算宽度值
+                    // console.log('i:' + i + '   widthin:' + widthin);
+                    if(widthin > 285){
+                        /*当宽度值相加大于285时
+                        * 当前循环的对象知识点及它后面的知识点全部添加class hide，没有大于285时不处理
+                        */
+                        $item.eq(i).addClass('hide');
+                        // console.log(666666666666666666)
+                        // target.find('.mechianmore').show();
+                    }
+                    // else{
+                    //     target.find('.mechianmore').hide()
+                    // }
+                    //更多出不出
+                    if($item.eq(i).hasClass('hide')){
+                        console.log('you hide')
+                        $item.eq(i).parents('.knowledge').find('.mechianmore').css('display','inline-block')
+                    }else{
+                        console.log('wu hide')
+                        $item.eq(i).parents('.knowledge').find('.mechianmore').css('display','none')
+                    }
+                }
+            }
+
+        },
+
+        getScrollTop: function () {
+            if (document.documentElement.scrollTop) {
                 return document.documentElement.scrollTop
             } else {
                 return document.body.scrollTop
@@ -78,8 +115,8 @@ module.exports = {
             this.commitChange()
         },
         deleteKnp: function (index) {
-            this.editingStem.knpList.splice(index, 1)
-            this.commitChange()
+            this.editingStem.knpList.splice(index, 1);
+            this.commitChange();
         },
         answerClick: function (e) {
             var $this = $(e.target);
@@ -116,14 +153,14 @@ module.exports = {
         commitChange: function () {
             util.log(this.editingStem)
             //this.showLoading();
-            this.$store.commit('SET_SCROLL_TOP',this.getScrollTop());
+            this.$store.commit('SET_SCROLL_TOP', this.getScrollTop());
             this.$store.dispatch('EDIT_SAVE', this.editingStem)
         },
         edit: function () {
             this.$emit('editLinkClick')
         },
         knpEdit: function () {
-            this.$store.commit('SET_SCROLL_TOP',this.getScrollTop());
+            this.$store.commit('SET_SCROLL_TOP', this.getScrollTop());
             this.$emit('knpLinkClick')
         },
         showLoading: function () {
@@ -145,16 +182,16 @@ module.exports = {
         }
     },
     computed: {
-        editingStem(){
+        editingStem() {
             return $.extend({}, this.$store.state.qListForRender[this.orderBy - 1])
         },
-        selectionArr(){
+        selectionArr() {
             var arr = {};
 
-            if(this.selectionNums){
+            if (this.selectionNums) {
                 arr['0'] = '选项个数';
                 var i = 2;
-                while (i<=this.selectionNums) {
+                while (i <= this.selectionNums) {
                     arr[i] = i;
                     i++
                 }
@@ -163,5 +200,12 @@ module.exports = {
             return arr;
         }
     },
-    watch: {}
+    watch: {
+        editingStem: {
+            handler() {
+                var that = this;
+                that.pointshoworhide();//监控editingStem的数据变化，调整知识点的宽度显示
+            }
+        }
+    }
 };

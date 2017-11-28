@@ -144,8 +144,8 @@ module.exports = {
             if(this.isAddAll){
                 this.$store.dispatch('ADD_ALL_KNP', knpArr)
             }
-            console.log(this.editingStem.knpList)
-            console.log(knpArr)
+            // console.log(this.editingStem.knpList)
+            // console.log(knpArr)
         },
         deleteKnp: function (index) {
             console.log(index)
@@ -447,8 +447,8 @@ module.exports = {
                     }
                 });
 
-                console.log('测试');
-                console.log(JSON.stringify(level1));
+                // console.log('测试');
+                // console.log(JSON.stringify(level1));
 
                 return level1
             }
