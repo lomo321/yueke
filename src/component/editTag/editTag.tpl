@@ -55,11 +55,11 @@
         <span><i>*</i>知识点</span>
         <div class="knowledge">
             <div class="wrap">
-                <div ref="abc">           
+                <!--<div>-->
                     <template v-for="(item,index) in editingStem.knpList" >           
                         <div class="item itemid">{{item.knpName}}<img style="position:absolute;right:2px;top:0;" src="/images/delete.png" alt="" v-on:click="deleteKnp(index)"></div>                               
                     </template>
-                </div> 
+                <!--</div> -->
             </div>
             <div class="rightfix">
                 <div v-on:click="edit" class="item more mechianmore">
