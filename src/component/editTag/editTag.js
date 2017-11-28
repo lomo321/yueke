@@ -30,11 +30,7 @@ module.exports = {
         pointshoworhide: function () {
             var that = this;
             var $pointbigbox = $(this.$el).find('.wrap'); //知识点大块
-
-            //for (var j = 0; j < $pointbigbox.length; j++) {
-
-            var target = $pointbigbox; //循环一组大题对象
-            var $items = target.find('.itemid');//读取的知识点值
+            var $items = $pointbigbox.find('.itemid');//读取的知识点值
             var widthin = 0; //初始化宽度为0
             var wrapperWidth = 0;//容器宽
             var overWidth = false;//是否超宽
@@ -53,33 +49,6 @@ module.exports = {
             });
             $(this.$el).find('.wrap').css('width',(wrapperWidth > 0 ? wrapperWidth + 10  + 'px' :''));
             $(this.$el).find('.mechianmore').css('display', overWidth ? 'inline-block' : 'none');
-
-            //for (var i = 0; i < $item.length; i++) {
-            //
-            //    widthin = widthin + $item.eq(i).width(); //循环计算宽度值
-            //    // console.log('i:' + i + '   widthin:' + widthin);
-            //    if (widthin > 285) {
-            //        /*当宽度值相加大于285时
-            //         * 当前循环的对象知识点及它后面的知识点全部添加class hide，没有大于285时不处理
-            //         */
-            //        $item.eq(i).addClass('hide');
-            //        // console.log(666666666666666666)
-            //        // target.find('.mechianmore').show();
-            //    }
-            //    // else{
-            //    //     target.find('.mechianmore').hide()
-            //    // }
-            //    //更多出不出
-            //    if ($item.eq(i).hasClass('hide')) {
-            //        console.log('you hide')
-            //        $item.eq(i).parents('.knowledge').find('.mechianmore').css('display', 'inline-block')
-            //    } else {
-            //        console.log('wu hide')
-            //        $item.eq(i).parents('.knowledge').find('.mechianmore').css('display', 'none')
-            //    }
-            //}
-            //}
-
         },
 
         getScrollTop: function () {
@@ -218,11 +187,11 @@ module.exports = {
         }
     },
     watch: {
-        editingStem: {
-            handler() {
-                var that = this;
-                //that.pointshoworhide();//监控editingStem的数据变化，调整知识点的宽度显示
-            }
-        }
+        //editingStem: {
+        //    handler() {
+        //        var that = this;
+        //        //that.pointshoworhide();//监控editingStem的数据变化，调整知识点的宽度显示
+        //    }
+        //}
     }
 };
