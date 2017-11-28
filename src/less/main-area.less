@@ -140,7 +140,18 @@
         div.wrap{
           height: 30px;
           display: inline-block; 
-          max-width: 312px;   
+          max-width: 290px;
+          float:left;
+          overflow: hidden;
+        }
+        .pointbox{
+          overflow: hidden;
+          display: inline-block;
+          width:500%;
+        }
+        div.rightfix{
+          overflow: hidden;
+          float: left;
         }
         div.item{
           display: inline-block;
@@ -152,10 +163,11 @@
           color: #2b7dbc;
           vertical-align: text-bottom;
           border-radius: 3px;
-          padding: 0 0 0 10px;
+          padding: 0 30px 0 10px;
           margin-right: 5px;
           overflow: hidden;
           float:left;
+          position: relative;
           &:hover{
             cursor:pointer;
           }
@@ -163,8 +175,6 @@
             padding: 0;
             border: none;
             background: #57adde;
-            position: absolute;
-            right:5px;
             img{
               width: 30px;
               height: 30px;
@@ -173,8 +183,6 @@
           }
           &.more{
             padding-right: 10px;
-            position:absolute;
-            right:40px;
           }
         }
         img {
@@ -272,4 +280,7 @@
     width: 100%;
     text-align: center;
   }
+}
+.hide{
+  display: none!important;
 }

@@ -46,19 +46,23 @@
             <div data-difficulty="0.3">提高</div>
         </div>
 
-    <template v-if="isShowMarks">
-        <span><i>&nbsp</i>分值</span>
-        <input class="input" type="text" v-model="editingStem.score" v-on:change="change">
-    </template>
+        <template v-if="isShowMarks">
+            <span><i>&nbsp</i>分值</span>
+            <input class="input" type="text" v-model="editingStem.score" v-on:change="change">
+        </template>
     </div>
-    <div class="edit-row">
+    <div class="edit-row pointbigbox">
         <span><i>*</i>知识点</span>
         <div class="knowledge">
             <div class="wrap">
-                <template v-for="(item,index) in editingStem.knpList" >
-                    <div class="item">{{item.knpName}}<img style="float: right;" src="/images/delete.png" alt="" v-on:click="deleteKnp(index)"></div>                  
-                </template>
-                <div  v-on:click="edit" class="item more">
+                <div ref="abc">           
+                    <template v-for="(item,index) in editingStem.knpList" >           
+                        <div class="item itemid">{{item.knpName}}<img style="position:absolute;right:2px;top:0;" src="/images/delete.png" alt="" v-on:click="deleteKnp(index)"></div>                               
+                    </template>
+                </div> 
+            </div>
+            <div class="rightfix">
+                <div v-on:click="edit" class="item more mechianmore">
                     更多
                 </div>
                 <div v-on:click="knpEdit" class="item add">
