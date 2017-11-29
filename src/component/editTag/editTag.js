@@ -144,6 +144,7 @@ module.exports = {
             this.$store.dispatch('EDIT_SAVE', this.editingStem)
         },
         edit: function () {
+            this.$store.commit('SET_SCROLL_TOP', this.getScrollTop());//打开新窗口前记录当前位置
             this.$emit('editLinkClick')
         },
         knpEdit: function () {
