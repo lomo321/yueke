@@ -73,6 +73,8 @@ module.exports = {
     },
     methods: {
         editSave: function (flag) {
+            console.log('flag')
+            console.log(flag)
             this.editingStem.stem = ue.getContent();
             if (this.editingStem.qtypeInner == 1 || this.editingStem.qtypeInner == 2) {
                 var arr = []
@@ -106,41 +108,44 @@ module.exports = {
             var knpArr = [];
             var that = this;
             this.selectedKplList.forEach(function (v, i) {
+                // console.log('v')
                 knpArr.push(JSON.parse(v))
+                // console.log(knpArr)
             });
-            if (this.editingStem.knpList != null) {
-                var newArr = {};
-                var output = [];
-                for (var i = 0; i < this.editingStem.knpList.length; i++) {
-                    if (!newArr[this.editingStem.knpList[i].knpId]) {
-                        newArr[this.editingStem.knpList[i].knpId] = this.editingStem.knpList[i].knpName
-                    }
-                }
-                for (var i = 0; i < knpArr.length; i++) {
-                    if (!newArr[knpArr[i].knpId]) {
-                        newArr[knpArr[i].knpId] = knpArr[i].knpName
-                    }
-                }
-                $.each(newArr, function (key, v) {
-                    output.push({
-                        knpId: key,
-                        knpName: v
-                    })
-                });
-                console.log(output)
-                this.editingStem.knpList = output
-            } else {
-                this.editingStem.knpList = knpArr
-            }
+            // if (this.editingStem.knpList != null) {
+            //     var newArr = {};
+            //     var output = [];
+            //     for (var i = 0; i < this.editingStem.knpList.length; i++) {
+            //         if (!newArr[this.editingStem.knpList[i].knpId]) {
+            //             newArr[this.editingStem.knpList[i].knpId] = this.editingStem.knpList[i].knpName
+            //         }
+            //     }
+            //     for (var i = 0; i < knpArr.length; i++) {
+            //         if (!newArr[knpArr[i].knpId]) {
+            //             newArr[knpArr[i].knpId] = knpArr[i].knpName
+            //         }
+            //     }
+            //     $.each(newArr, function (key, v) {
+            //         output.push({
+            //             knpId: key,
+            //             knpName: v
+            //         })
+            //     });
+            //     console.log('output')
+            //     console.log(output)
+            //     this.editingStem.knpList = output
+            // } else {
+                this.editingStem.knpList = knpArr;
+            // }
             this.editingStem.stem = ue.getContent();
             if (this.editingStem.qtypeInner == 1 || this.editingStem.qtypeInner == 2) {
             } else {
                 this.editingStem.answer = ue2.getContent();
                 this.editingStem.answerCount = '';
             }
-            this.showLoading();
+            this.showLoading(); //loading遮罩打开
             this.$store.dispatch('EDIT_SAVE', this.editingStem)
-            this.hideKnp();
+            this.hideKnp(); //loading遮罩关闭
             if(this.isAddAll){
                 this.$store.dispatch('ADD_ALL_KNP', knpArr)
             }
@@ -300,7 +305,8 @@ module.exports = {
         },
         hideLoading: function () {
             $('.load-container').addClass('none')
-        },
+        }
+
     },
     filters: {
         numberlize: function (value) {
