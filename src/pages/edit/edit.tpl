@@ -109,10 +109,10 @@
 
                                     <div v-if="item.score && isShowMarks" class="score">（{{item.score}}分）</div>
                                 </div>
-                                <template v-if="bookInfo.cardFormat != 1">
+                                <template v-if="bookInfo.cardFormat != 1"><!--答题卡-->
                                     <section></section>
                                 </template>
-                                <template v-if="bookInfo.cardFormat == 1">
+                                <template v-if="bookInfo.cardFormat == 1"><!--非答题卡-->
                                     <section v-html="item.stem"></section>
                                 </template>
                                 <div class="answer-area" v-if="item.qtypeInner != 1 && item.qtypeInner != 2" v-bind:style="{height: item.height + 'px'}">

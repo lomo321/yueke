@@ -72,9 +72,9 @@ module.exports = {
         })
     },
     methods: {
-        editSave: function (flag) {
-            console.log('flag')
-            console.log(flag)
+        editSave: function (flag) {//题目编辑点保存
+            // console.log('flag')
+            // console.log(flag)
             this.editingStem.stem = ue.getContent();
             if (this.editingStem.qtypeInner == 1 || this.editingStem.qtypeInner == 2) {
                 var arr = []
@@ -98,13 +98,16 @@ module.exports = {
             this.showLoading();
             this.$store.dispatch('EDIT_SAVE', this.editingStem)
             this.hideEdit();
+
+            //那个地方
+            $('#editLayer').hide();//关闭编辑窗口
         },
         addShareSave: function () {
             this.editingStem.shareStem = ue3.getContent();
             this.$store.dispatch('EDIT_SAVE', this.editingStem)
             this.hideAddShare()
         },
-        knpSave: function () {
+        knpSave: function () {//修改知识点，保存
             var knpArr = [];
             var that = this;
             this.selectedKplList.forEach(function (v, i) {
@@ -151,6 +154,12 @@ module.exports = {
             }
             // console.log(this.editingStem.knpList)
             // console.log(knpArr)
+            //那个地方
+            if(!$('#layer').hasClass('none')){
+                $('#layer').addClass('none');//隐藏背景
+            }
+            // $('#layer').hide();
+            
         },
         deleteKnp: function (index) {
             console.log(index)
@@ -226,14 +235,20 @@ module.exports = {
             this.$store.commit('SHOW_KNP')
         },
         hideKnp: function () {
-            this.$store.commit('HIDE_KNP')
+            this.$store.commit('HIDE_KNP');
+            //那个地方
+             if(!$('#layer').hasClass('none')){
+                $('#layer').addClass('none');//隐藏背景
+            }
         },
 
         showEdit: function () {
             this.$store.commit('SHOW_EDIT')
         },
         hideEdit: function () {
-            this.$store.commit('HIDE_EDIT')
+            this.$store.commit('HIDE_EDIT');
+            //那个地方
+            $('#editLayer').hide();//关闭编辑窗口
         },
 
         hideAdd: function () {

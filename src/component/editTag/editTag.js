@@ -143,19 +143,27 @@ module.exports = {
             this.$store.commit('SET_SCROLL_TOP', this.getScrollTop());
             this.$store.dispatch('EDIT_SAVE', this.editingStem)
         },
-        edit: function () {
+        edit: function () {//题目编辑弹框
             this.$store.commit('SET_SCROLL_TOP', this.getScrollTop());//打开新窗口前记录当前位置
-            this.$emit('editLinkClick')
+            this.$emit('editLinkClick');
+            //那个地方
+            $('#layer').removeClass('none');//打开遮罩 
+            $('#editLayer').show();//打开编辑窗口 
         },
-        knpEdit: function () {
+        knpEdit: function () { //右侧浮窗添加知识点
             this.$store.commit('SET_SCROLL_TOP', this.getScrollTop());
-            this.$emit('knpLinkClick')
+            //那个地方
+            this.$emit('editLinkClick')//先出现编辑窗口
+            $('#editLayer').hide();//关闭编辑窗口
+            //那个地方end
+            
+            this.$emit('knpLinkClick');//再出添加知识点窗口
+            
         },
-        showLoading: function () {
+        showLoading: function () {//显示loading窗
             $('.load-container').removeClass('none')
-
         },
-        hideLoading: function () {
+        hideLoading: function () {//隐藏loadin窗
             $('.load-container').addClass('none')
         },
     },

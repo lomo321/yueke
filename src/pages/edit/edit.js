@@ -84,9 +84,14 @@ module.exports = {
             })
             .on('click', '.hover-edit', function () {
                 that.editStem(that.hoverInfo['order']);
+                //那个地方
+                $('#layer').removeClass('none');//打开遮罩 
+                $('#editLayer').show();//打开编辑窗口 
             })
             .on('click', '.hover-insert', function () {
                 that.addQuestion({order: that.hoverInfo['order']});
+                //那个地方
+                $('#layer').removeClass('none');//打开遮罩 
             })
             .on('click', '.hover-delete', function () {
                 that.delete(that.hoverInfo['order']);
@@ -99,6 +104,8 @@ module.exports = {
             })
             .on('click', '.hover-text', function () {
                 that.addShareStem(that.hoverInfo['order']);
+                //那个地方
+                $('#layer').removeClass('none');//打开遮罩 
             })
             .on('click','.hover-remove',function(){
                 console.log('~~~')
