@@ -2,6 +2,8 @@
  * Created by lomo on 2017/10/7.
  */
 var hostSetting = window.hostSetting || 'http://211.159.185.181:8080';
+var token = window.sessionStorage.KEY_ACCESS_TOKEN ? 'Bearer '+ window.sessionStorage.KEY_ACCESS_TOKEN : '' ;
+
 module.exports = {
     getSchoolWork: function (id) {
         var defer = $.Deferred();
@@ -12,6 +14,7 @@ module.exports = {
             url: hostSetting + '/schoolwork/getSchoolwork?ajax=true',
             data: JSON.stringify(data),
             type: 'POST',
+            headers: { Authorization: token },
             contentType: 'application/json;charset=utf-8 ',
             processData: false,
             success: function (result) {
@@ -54,6 +57,7 @@ module.exports = {
             url: hostSetting + '/schoolwork/getErrorSchoolwork?ajax=true',
             data: JSON.stringify(data),
             type: 'POST',
+            headers: { Authorization: token },
             contentType: 'application/json;charset=utf-8 ',
             processData: false,
             success: function (result) {
@@ -74,10 +78,11 @@ module.exports = {
             url: hostSetting + '/schoolwork/getNormalQuestion?ajax=true',
             data: JSON.stringify(data),
             type: 'POST',
+            headers: { Authorization: token },
             contentType: 'application/json;charset=utf-8 ',
             processData: false,
             success: function (result) {
-                defer.resolve(result)
+                defer.resolve(result)  
             },
             fail: function (data) {
                 defer.reject(data)
@@ -96,6 +101,7 @@ module.exports = {
             url: hostSetting + '/schoolwork/getQuestionDetails?ajax=true',
             data: JSON.stringify(data),
             type: 'POST',
+            headers: { Authorization: token },
             contentType: 'application/json;charset=utf-8 ',
             processData: false,
             success: function (result) {
@@ -128,6 +134,7 @@ module.exports = {
             url: hostSetting + '/schoolwork/modify?ajax=true',
             data: JSON.stringify(params),
             type: 'POST',
+            headers: { Authorization: token },
             contentType: 'application/json;charset=utf-8 ',
             processData: false,
             success: function (result) {
@@ -149,6 +156,7 @@ module.exports = {
             url: hostSetting + '/schoolwork/delQuestion?ajax=true',
             data: JSON.stringify(data),
             type: 'POST',
+            headers: { Authorization: token },
             contentType: 'application/json;charset=utf-8 ',
             processData: false,
             success: function (result) {
@@ -179,6 +187,7 @@ module.exports = {
             url: hostSetting + '/schoolwork/updateSchoolworkQuestion?ajax=true',
             data: JSON.stringify(data),
             type: 'POST',
+            headers: { Authorization: token },
             contentType: 'application/json;charset=utf-8 ',
             processData: false,
             success: function (result) {
@@ -204,6 +213,10 @@ module.exports = {
             url: hostSetting + '/schoolwork/bulkAddQuestion?ajax=true',
             data: JSON.stringify(data),
             type: 'POST',
+            headers: { Authorization: token },
+            beforeSend: function(request) {                
+               request.setRequestHeader("Authorization", token);
+            },
             contentType: 'application/json;charset=utf-8 ',
             processData: false,
             success: function (result) {
@@ -225,6 +238,7 @@ module.exports = {
             url: hostSetting + '/schoolwork/changeSchoolworkName?ajax=true',
             data: JSON.stringify(data),
             type: 'POST',
+            headers: { Authorization: token },
             contentType: 'application/json;charset=utf-8 ',
             processData: false,
             success: function (result) {
@@ -259,6 +273,7 @@ module.exports = {
             url: hostSetting + '/schoolwork/queryAllList?ajax=true',
             data: JSON.stringify(data),
             type: 'POST',
+            headers: { Authorization: token },
             contentType: 'application/json;charset=utf-8 ',
             processData: false,
             success: function (result) {
@@ -299,6 +314,7 @@ module.exports = {
             url: hostSetting + '/schoolwork/getTbCatalogList?ajax=true',
             data: JSON.stringify(data),
             type: 'POST',
+            headers: { Authorization: token },
             contentType: 'application/json;charset=utf-8 ',
             processData: false,
             success: function (result) {
@@ -332,6 +348,7 @@ module.exports = {
             url: hostSetting + '/schoolwork/getKnpList?ajax=true',
             data: JSON.stringify(data),
             type: 'POST',
+            headers: { Authorization: token },
             contentType: 'application/json;charset=utf-8 ',
             processData: false,
             success: function (result) {
@@ -362,6 +379,7 @@ module.exports = {
             url: hostSetting + '/schoolwork/bulkAddKnp?ajax=true',
             data: JSON.stringify(data),
             type: 'POST',
+            headers: { Authorization: token },
             contentType: 'application/json;charset=utf-8 ',
             processData: false,
             success: function (result) {
