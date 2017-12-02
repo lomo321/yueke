@@ -51,6 +51,7 @@ module.exports = {
         $('.add-knp')
             .on('click', function () {
                 that.showKnp();
+                that.saveStem();
             });
         $('#selectAnswer')
             .on('click', '.answer-item', function () {
@@ -188,6 +189,27 @@ module.exports = {
             }
             util.log(this.editingStem)
             this.showLoading();
+            this.$store.dispatch('EDIT_SAVE', this.editingStem)
+        },
+
+        saveStem:function () {
+            this.editingStem.stem = ue.getContent();
+            if (this.editingStem.qtypeInner == 1 || this.editingStem.qtypeInner == 2) {
+                var arr = []
+                $('#selectAnswer').find('.answer-item').forEach(function (v, i) {
+                    if ($(v).hasClass('selected')) {
+                        arr.push($(v).text())
+                    }
+                })
+                var answer = arr.join(',');
+                if (answer) {
+                    this.editingStem.answer = answer
+                }
+            } else {
+                this.editingStem.answer = ue2.getContent();
+                this.editingStem.answerCount = '';
+            }
+
             this.$store.dispatch('EDIT_SAVE', this.editingStem)
         },
         /**
