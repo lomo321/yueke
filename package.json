@@ -10,6 +10,7 @@
     "babel-core": "^6.26.0",
     "babel-loader": "^7.1.2",
     "gulp": "^3.9.1",
+    "gulp-uglify": "^3.0.0",
     "gulp-webserver": "^0.9.1",
     "vue-template-compiler": "^2.4.4"
   },
