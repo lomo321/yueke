@@ -3,7 +3,7 @@
  */
 var hostSetting = window.hostSetting || 'http://211.159.185.181:8080';
 var token = window.sessionStorage.KEY_ACCESS_TOKEN ? 'Bearer '+ window.sessionStorage.KEY_ACCESS_TOKEN : '' ;
-
+// token = 'Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ3d3cuaG5temhjLmNvbSIsImV4cCI6MTUxMzA0MjEzMSwicm9sZXMiOiIxMCIsImZpcnN0TmFtZSI6ImRlbmciLCJ1c2VyaWQiOiIzMzUxNTQyODY4NTE3ODQ3MDQiLCJhdWQiOiJ5aXBhaXp1b3llIGFwcCIsImlhdCI6MTUxMjE3ODEzMX0.aIHlPuXtofa1KSRCAmnxTgciTl0ZPAwdjyio8bBhG7QDxvkJ-lOM-vTcI4fFlRdUHmOf9fP_uKKWcMaB-9k3wg'  
 module.exports = {
     getSchoolWork: function (id) {
         var defer = $.Deferred();

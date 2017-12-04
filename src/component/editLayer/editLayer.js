@@ -48,13 +48,11 @@ module.exports = {
         //         e.stopPropagation();
 
         //     });
-        $('.add-knp')
-            .on('click', function () {
+        $('.add-knp').on('click', function () {
                 that.showKnp();
-                that.saveStem();
+                that.saveStem();//记录打开知识点页面前的编辑窗的修改内容
             });
-        $('#selectAnswer')
-            .on('click', '.answer-item', function () {
+        $('#selectAnswer').on('click', '.answer-item', function () {
                 if (that.editingStem.qtypeInner == 1) {
                     $(this).toggleClass('selected');
                     $(this).siblings().removeClass('selected')
@@ -147,7 +145,7 @@ module.exports = {
             // }
             this.showLoading(); //loading遮罩打开
             this.$store.dispatch('EDIT_SAVE', this.editingStem)
-            this.hideKnp(); //loading遮罩关闭
+            this.hideKnp(); //知识点弹窗关闭
             if(this.isAddAll){
                 this.$store.dispatch('ADD_ALL_KNP', knpArr)
             }
