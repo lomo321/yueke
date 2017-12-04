@@ -83,7 +83,9 @@ module.exports = {
 
             })
             .on('click', '.hover-edit', function () {
-                that.editStem(that.hoverInfo['order']);
+                that.editStem(that.hoverInfo['order']);                           
+                // $("#editLayer .edit-wrap").scrollTop(0);
+                                     
             })
             .on('click', '.hover-insert', function () {
                 that.addQuestion({order: that.hoverInfo['order']});
@@ -160,7 +162,6 @@ module.exports = {
             that.updateEdit();
             that.updatePageNum();
             that.hideLoading();
-            $("body,html").scrollTop(this.scrollTop);
         }
     },
     methods: {
@@ -250,7 +251,7 @@ module.exports = {
                         //假如只剩下题干还超高
                         var $p = $($v.find('section'));
                         var tableHtml = $($p.find('table')[0]).prop("outerHTML");
-                        console.log(tableHtml);
+                        // console.log(tableHtml);
                         var rptable ='';
                         if(tableHtml) {
                             rptable = tableHtml.replace(/<br>/ig,'');
@@ -481,7 +482,7 @@ module.exports = {
             this.$store.commit('CHANGE_EDITING_ORDER', order);
             this.editingOrder = order;
             //util.log(this.editingStem)
-            this.showEdit();
+            this.showEdit();      
 
         },
 
@@ -621,6 +622,7 @@ module.exports = {
             this.qListForRender.forEach(function (v) {
                 mark = mark + v.score
             })
+            
             if (this.isShowMarks) {
                 return mark
             } else {

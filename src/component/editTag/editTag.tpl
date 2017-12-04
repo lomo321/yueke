@@ -62,7 +62,7 @@
                 <!--</div> -->
             </div>
             <div class="rightfix">
-                <div v-on:click="edit" class="item more mechianmore">
+                <div v-on:click="editmoreKnp" class="item more mechianmore">
                     更多
                 </div>
                 <div v-on:click="knpEdit" class="item add">
@@ -83,7 +83,7 @@
         </template>
         <template v-if="editingStem.qtypeInner != 1 && editingStem.qtypeInner != 2">
             <span class="short-answer" v-if="editingStem.answer">{{editingStem.answer | textlize}}</span>
-            <span v-else class="add-answer" v-on:click="edit"><img src="/images/add2.png" alt=""> 添加答案 </span>
+            <span v-else class="add-answer" v-on:click="editanswer"><img src="/images/add2.png" alt=""> 添加答案 </span>
             <!--<span class="short-answer" v-if="!editingStem.answer">{{editingStem.answer | textlize}}</span>-->
         </template>
         <div class="edit-link" v-on:click="edit">

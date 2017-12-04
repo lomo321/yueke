@@ -65,10 +65,17 @@ module.exports = {
         })
     },
     updated: function () {
+        var that = this;
         $('.knp-checkbox').on('click', function (e) {
             e.stopPropagation();
 
         })
+        // console.log(window.localStorage.setTop)
+        if(window.localStorage.setTop){
+            $("#editLayer .edit-wrap").scrollTop(window.localStorage.setTop);
+            window.localStorage.removeItem('setTop');//每次使用完后清理掉缓存
+        }
+
     },
     methods: {
         editSave: function (flag) {//题目编辑点保存
