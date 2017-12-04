@@ -51,14 +51,6 @@ module.exports = {
             $(this.$el).find('.wrap').css('width',(wrapperWidth > 0 ? wrapperWidth  + 'px' :''));
             $(this.$el).find('.mechianmore').css('display', overWidth ? 'inline-block' : 'none');
         },
-
-        getScrollTop: function () {
-            if (document.documentElement.scrollTop) {
-                return document.documentElement.scrollTop
-            } else {
-                return document.body.scrollTop
-            }
-        },
         updateShow: function () {
             var type = this.editingStem.qtypeInner;
             var difficulty = this.editingStem.difficulty;
@@ -141,15 +133,15 @@ module.exports = {
             util.log(this.editingStem)
             //this.showLoading();
 
-            this.$store.commit('SET_SCROLL_TOP', this.getScrollTop());
+            this.$store.commit('SET_SCROLL_TOP');
             this.$store.dispatch('EDIT_SAVE', this.editingStem)
         },
         edit: function () {//题目编辑弹框
-            this.$store.commit('SET_SCROLL_TOP', this.getScrollTop());//打开新窗口前记录当前位置
+            this.$store.commit('SET_SCROLL_TOP');//打开新窗口前记录当前位置
             this.$emit('editLinkClick');
         },
         knpEdit: function () { //右侧浮窗添加知识点
-            this.$store.commit('SET_SCROLL_TOP', this.getScrollTop());
+            this.$store.commit('SET_SCROLL_TOP');
             
             this.$emit('knpLinkClick');//再出添加知识点窗口
             

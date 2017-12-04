@@ -326,8 +326,14 @@ const store = new Vuex.Store({
         SET_DOWNLOAD_LINK:(state,url)=>{
             state.downloadLink = url
         },
-        SET_SCROLL_TOP:(state,scrollTop) => {
-            state.scrollTop = scrollTop || 0;
+        SET_SCROLL_TOP:(state) => {
+            var top;
+            if (document.documentElement.scrollTop) {
+                top = document.documentElement.scrollTop
+            } else {
+                top = document.body.scrollTop
+            }
+            state.scrollTop = top || 0;
         },
         CHANGE_ORDER_UP:(state,order) => {
             var temp = state.orderInfomation[order - 1]
