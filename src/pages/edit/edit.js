@@ -249,7 +249,16 @@ module.exports = {
                         }
                         //假如只剩下题干还超高
                         var $p = $($v.find('section'));
+                        var tableHtml = $($p.find('table')[0]).prop("outerHTML");
+                        console.log(tableHtml);
+                        var rptable ='';
+                        if(tableHtml) {
+                            rptable = tableHtml.replace(/<br>/ig,'');
+                        }
                         var html = $p.html();
+                        html = html.replace(/<table[\s\S]+?<\/table>/ig,function(match){
+                            return rptable
+                        });
                         var array = html.split('<br>');
                         var array2 = html.split('<br>');
                         var s = '';
