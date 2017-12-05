@@ -3,7 +3,7 @@
  */
 var hostSetting = window.hostSetting || 'http://211.159.185.181:8080';
 var token = window.sessionStorage.KEY_ACCESS_TOKEN ? 'Bearer '+ window.sessionStorage.KEY_ACCESS_TOKEN : '' ;
-// token = 'Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ3d3cuaG5temhjLmNvbSIsImV4cCI6MTUxMzA0MjEzMSwicm9sZXMiOiIxMCIsImZpcnN0TmFtZSI6ImRlbmciLCJ1c2VyaWQiOiIzMzUxNTQyODY4NTE3ODQ3MDQiLCJhdWQiOiJ5aXBhaXp1b3llIGFwcCIsImlhdCI6MTUxMjE3ODEzMX0.aIHlPuXtofa1KSRCAmnxTgciTl0ZPAwdjyio8bBhG7QDxvkJ-lOM-vTcI4fFlRdUHmOf9fP_uKKWcMaB-9k3wg'  
+// token = 'Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ3d3cuaG5temhjLmNvbSIsImV4cCI6MTUxMzIyNTUzMywicm9sZXMiOiIxMCIsImZpcnN0TmFtZSI6ImRlbmciLCJ1c2VyaWQiOiIzMzUxNTQyODY4NTE3ODQ3MDQiLCJhdWQiOiJ5aXBhaXp1b3llIGFwcCIsImlhdCI6MTUxMjM2MTUzM30.JxPDlwed_viZzaVLFOmjwE9_5cfqccV8RXEuG5NLeY9l5ohWLDbn_1X4GDHW-6zkiKCDd7tB6V_J3WLrI5oDKg'  
 module.exports = {
     getSchoolWork: function (id) {
         var defer = $.Deferred();
@@ -132,7 +132,7 @@ module.exports = {
         };
         $.ajax({
             url: hostSetting + '/schoolwork/modify?ajax=true',
-            data: JSON.stringify(params),
+            data: JSON.stringify(data),
             type: 'POST',
             headers: { Authorization: token },
             contentType: 'application/json;charset=utf-8 ',

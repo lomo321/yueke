@@ -83,8 +83,8 @@ module.exports = {
 
             })
             .on('click', '.hover-edit', function () {
-                that.editStem(that.hoverInfo['order']);                           
-                // $("#editLayer .edit-wrap").scrollTop(0);
+                that.editStem(that.hoverInfo['order']);
+                window.localStorage.setTop = '0';//将位置缓存起来               
                                      
             })
             .on('click', '.hover-insert', function () {

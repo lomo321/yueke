@@ -140,7 +140,7 @@
                     </div>
                     <div>
                         <span>高度</span>
-                        <input class="input" type="text" v-model="editingStem.height">
+                        <input class="input" type="text" v-model="editingStem.height"><span style="padding-left:5px;">像素</span> 
                     </div>
 
                 </div>

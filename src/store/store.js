@@ -297,6 +297,12 @@ const store = new Vuex.Store({
                 if(!v.height){
                     v.height = 200;
                 }
+                // else if(v.height > 30){
+                //     v.height = 30;
+                //     // v.height = Math.ceil(v.height / 30);
+                // }else if(v.height < 1){
+                //     v.height = 1;
+                // }
                 
             });
             state.qListForRender = qList

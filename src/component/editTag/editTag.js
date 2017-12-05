@@ -139,6 +139,17 @@ module.exports = {
         edit: function () {//题目编辑弹框
             this.$store.commit('SET_SCROLL_TOP');//打开新窗口前记录当前位置
             this.$emit('editLinkClick');
+            window.localStorage.setTop = '0';//将位置缓存起来
+        },
+        editmoreKnp:function () {//右侧more知识点                    
+            this.$emit('editLinkClick');
+            window.localStorage.setTop = '240';
+        },
+        editanswer: function () {//右侧添加答案            
+            // this.$store.commit('SET_SCROLL_TOP');
+            // this.$store.dispatch('EDIT_SAVE', this.editingStem)
+            this.$emit('editLinkClick');
+            window.localStorage.setTop = '550';
         },
         knpEdit: function () { //右侧浮窗添加知识点
             this.$store.commit('SET_SCROLL_TOP');

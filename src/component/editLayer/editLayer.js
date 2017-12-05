@@ -75,7 +75,7 @@ module.exports = {
             $("#editLayer .edit-wrap").scrollTop(window.localStorage.setTop);
             window.localStorage.removeItem('setTop');//每次使用完后清理掉缓存
         }
-
+        // that.editingStem.height = that.editingStem.heightLen * 30;
     },
     methods: {
         editSave: function (flag) {//题目编辑点保存
@@ -525,6 +525,6 @@ module.exports = {
                     that.selectedKplList.push(JSON.stringify(v))
                 });
             }
-        }
+        },
     }
 };
