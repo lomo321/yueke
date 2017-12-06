@@ -199,7 +199,7 @@ const store = new Vuex.Store({
                 "height":+params.height || 100
             };
             ajax.modifyQuestion(param).done(function(data){
-                console.log(data)
+                // console.log(data)
                 dispatch('GET_All_QUESTIONS',{id:state.currentBookId});
                 dispatch('GET_ERROR_QUESTIONS', {id: state.currentBookId});
             })
@@ -333,10 +333,10 @@ const store = new Vuex.Store({
             state.downloadLink = url
         },
         SET_SCROLL_TOP:(state) => {
-            var top;
-            if (document.documentElement.scrollTop) {
+            var top = 0;
+            if (document.documentElement.scrollTop>0) {
                 top = document.documentElement.scrollTop
-            } else {
+            } else if(document.body.scrollTop>0){
                 top = document.body.scrollTop
             }
             state.scrollTop = top || 0;

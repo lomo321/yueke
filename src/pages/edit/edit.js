@@ -169,14 +169,20 @@ module.exports = {
          * 更新渲染的页面
          */
         updatePage: function () {
-            var $page = $('#hiddenPage');
+            var $page = $('#hiddenPage'); //实际存放页面结构数据的div，所有的更改都从此结构获取
             this.editPosition = [];
             //清除旧的
-            $('.page.rendered').remove();
+            // $('.page.rendered').remove();
+            /* 当前显示的分页结构页面，每次更新数据，都会对此进行删除重新搭建
+            *  正因为每次都是先删除结构再添加，才会出现滚动条位置不对的情况
+            */
+            $('.page.rendered').addClass("oldrend"); //Abao 针对上述情况，先对旧结构添加class名，在后续新结构添加后再删除
+
             var html = $page.html();
             var $newPage = $('<div class="page rendered"></div>').html(html).insertAfter($page);
             this.pageNum = 1;
             this.seperatePage($newPage);
+            $(".oldrend").remove(); //Abao 删除旧结构
         },
 
         /**

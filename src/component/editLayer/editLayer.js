@@ -70,12 +70,13 @@ module.exports = {
             e.stopPropagation();
 
         })
-        // console.log(window.localStorage.setTop)
         if(window.localStorage.setTop){
-            $("#editLayer .edit-wrap").scrollTop(window.localStorage.setTop);
-            window.localStorage.removeItem('setTop');//每次使用完后清理掉缓存
+            setTimeout(function(){
+                $("#editLayer .edit-wrap").scrollTop(parseInt(window.localStorage.setTop));
+                window.localStorage.removeItem('setTop');//每次使用完后清理掉缓存
+            },10)
+            
         }
-        // that.editingStem.height = that.editingStem.heightLen * 30;
     },
     methods: {
         editSave: function (flag) {//题目编辑点保存
