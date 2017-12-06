@@ -29,11 +29,12 @@ module.exports = {
         //计算知识点宽度控制显示/隐藏
         pointshoworhide: function () {
             var that = this;
-            var $pointbigbox = $(this.$el).find('.wrap'); //知识点大块
+            var $pointbigbox = $(this.$el).find('.wrap').css('width',''); //知识点大块
             var $items = $pointbigbox.find('.itemid');//读取的知识点值
             var widthin = 0; //初始化宽度为0
             var wrapperWidth = 0;//容器宽
             var overWidth = false;//是否超宽
+
             $.each($items, function (i,item) {
                 $(item).removeClass('hide');
                 if(!overWidth) {
@@ -48,7 +49,7 @@ module.exports = {
                     $(item).addClass('hide');
                 }
             });
-            $(this.$el).find('.wrap').css('width',(wrapperWidth > 0 ? wrapperWidth  + 'px' :''));
+            $pointbigbox.css('width',(wrapperWidth > 0 ? wrapperWidth  + 'px' :''));
             $(this.$el).find('.mechianmore').css('display', overWidth ? 'inline-block' : 'none');
         },
         updateShow: function () {
