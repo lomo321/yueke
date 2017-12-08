@@ -177,12 +177,15 @@ module.exports = {
             *  正因为每次都是先删除结构再添加，才会出现滚动条位置不对的情况
             */
             $('.page.rendered').addClass("oldrend"); //Abao 针对上述情况，先对旧结构添加class名，在后续新结构添加后再删除
+            var areaHeight = $(".main-area .edit-area").height();
+            $(".main-area .edit-area").css("height",areaHeight);
 
             var html = $page.html();
             var $newPage = $('<div class="page rendered"></div>').html(html).insertAfter($page);
             this.pageNum = 1;
             this.seperatePage($newPage);
             $(".oldrend").remove(); //Abao 删除旧结构
+            $(".main-area .edit-area").css("height","auto");
         },
 
         /**
