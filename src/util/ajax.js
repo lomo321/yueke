@@ -3,7 +3,7 @@
  */
 var hostSetting = window.hostSetting || 'http://211.159.185.181:8080';
 var token = window.sessionStorage.KEY_ACCESS_TOKEN ? 'Bearer '+ window.sessionStorage.KEY_ACCESS_TOKEN : '' ;
-// token = 'Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ3d3cuaG5temhjLmNvbSIsImV4cCI6MTUxMzIyNTUzMywicm9sZXMiOiIxMCIsImZpcnN0TmFtZSI6ImRlbmciLCJ1c2VyaWQiOiIzMzUxNTQyODY4NTE3ODQ3MDQiLCJhdWQiOiJ5aXBhaXp1b3llIGFwcCIsImlhdCI6MTUxMjM2MTUzM30.JxPDlwed_viZzaVLFOmjwE9_5cfqccV8RXEuG5NLeY9l5ohWLDbn_1X4GDHW-6zkiKCDd7tB6V_J3WLrI5oDKg'  
+// token = 'Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ3d3cuaG5temhjLmNvbSIsImV4cCI6MTUxNTMyMDYxMiwicm9sZXMiOiIxMCIsImZpcnN0TmFtZSI6ImRlbmciLCJ1c2VyaWQiOiIzMzUxNTQyODY4NTE3ODQ3MDQiLCJhdWQiOiJ5aXBhaXp1b3llIGFwcCIsImlhdCI6MTUxNDQ1NjYxMn0.Kpy90lM6yCUrlcxZ5bED416DAmmXytuGJdtLtZlUYNlRg3DERaBMAPvMcUOjFTVFLKCxn0r5SVxeuvQwUzdgEg'  
 module.exports = {
     getSchoolWork: function (id) {
         var defer = $.Deferred();
@@ -39,6 +39,7 @@ module.exports = {
                  createDate ,          '收录时间'
                  updateBy,            '最后修改人'
                  updateDate,          '最后修改时间'
+                 isShowScroe,    '分数是否选中0为未选中'
                  * **/
                 defer.resolve(result)
             },
@@ -390,5 +391,23 @@ module.exports = {
             }
         });
         return defer
-    }
+    },
+    modifyIsShowScore: function(params) {
+            var defer = $.Deferred();
+            $.ajax({
+                url: hostSetting + '/schoolwork/modifyIsShowScore?ajax=true',
+                data: JSON.stringify(params),
+                type: 'POST',
+                headers: { Authorization: token },
+                contentType: 'application/json;charset=utf-8 ',
+                processData: false,
+                success: function success(result) {
+                    defer.resolve(result);
+                },
+                fail: function fail(data) {
+                    defer.reject(data);
+                }
+            });
+            return defer;
+        }
 };

@@ -31,11 +31,15 @@ module.exports = {
             isShowMarks: false,
             //首次进入页面
             firstTime: true,
-            pageNum:0
+            pageNum:0,
+            ischecked:0,
+            first: true
         }
     },
     mounted: function () {
+        
         var that = this;
+
         scrollTo(0, 0);
         util.log('edit page mounted');
 
@@ -163,6 +167,18 @@ module.exports = {
             that.updatePageNum();
             that.hideLoading();
         }
+
+        
+
+        that.ischecked = that.$store.state.isShowScore;//api新增的值判断初次进入分数是否选中，0为不选中
+        if(that.first){
+            if(that.ischecked==0){
+                that.isShowMarks = false;
+            }else{
+                that.isShowMarks = true;
+            }
+            that.first = false;
+        }
     },
     methods: {
         /**
@@ -180,11 +196,27 @@ module.exports = {
             var areaHeight = $(".main-area .edit-area").height();
             $(".main-area .edit-area").css("height",areaHeight);
 
+            //在结构添加前获取当前滚动条的位置
+            if(document.documentElement.scrollTop){
+                var scrollTop = document.documentElement.scrollTop;
+            }else if(document.body.scrollTop){
+                var scrollTop = document.body.scrollTop;
+            }
+
             var html = $page.html();
             var $newPage = $('<div class="page rendered"></div>').html(html).insertAfter($page);
             this.pageNum = 1;
+
             this.seperatePage($newPage);
             $(".oldrend").remove(); //Abao 删除旧结构
+
+            //结构改变后设置滚动条位置
+            if(document.documentElement.scrollTop){
+                document.documentElement.scrollTop = scrollTop;
+            }else if(document.body.scrollTop){
+                document.body.scrollTop = scrollTop;
+            }
+            
             $(".main-area .edit-area").css("height","auto");
         },
 
@@ -346,6 +378,7 @@ module.exports = {
                 var $stemArea = $($newPage.find('.stem-area'));
                 buffer.forEach(function (v) {
                     v.appendTo($stemArea)
+                    // v.append($stemArea)
                 });
                 $newPage.insertAfter($page);
                 this.seperatePage($newPage)
@@ -390,28 +423,32 @@ module.exports = {
         toPreview: function () {
             var that = this;
             var msg = '';
-            this.qListForRender.forEach(function (v) {
-                msg = msg + ( that.checkQuestion(v) ? '\n' + that.checkQuestion(v) : '')
-            });
-            if(!this.qListForRender.length ) {
-                msg = that.bookInfo.cardFormat == 2 ? '您的答题卡还没有内容' : '您需要添加题目'
-            }
-            if (msg) {
-                window.confirm(msg)
-            } else if (this.isShowMarks && (this.totalMark != 100 && this.totalMark != 120 && this.totalMark != 150)) {
-                var flag = window.confirm('当前试卷总分为' + this.totalMark + '，确定要提交？')
-                if (flag) {
-                    this.showLoading();
-                    this.updatePreviewHtml();
-                    this.hideLoading();
-                    location.href = location.href.replace('#/edit', '#/preview')
+            setTimeout(function() {
+                that.qListForRender.forEach(function (v) {
+                    msg = msg + ( that.checkQuestion(v) ? '\n' + that.checkQuestion(v) : '')
+                });
+                if(!that.qListForRender.length ) {
+                    msg = that.bookInfo.cardFormat == 2 ? '您的答题卡还没有内容' : '您需要添加题目'
                 }
-            } else {
-                this.showLoading();
-                this.updatePreviewHtml();
-                this.hideLoading();
-                location.href = location.href.replace('#/edit', '#/preview')
-            }
+                if (msg) {
+                    window.confirm(msg)
+                } else if (that.isShowMarks && (that.totalMark != 100 && that.totalMark != 120 && that.totalMark != 150)) {
+                    var flag = window.confirm('当前试卷总分为' + that.totalMark + '，确定要提交？')
+                    if (flag) {
+                        that.showLoading();
+                        that.updatePreviewHtml();
+                        that.hideLoading();
+                        location.href = location.href.replace('#/edit', '#/preview')
+                    }
+                } else {
+                    that.showLoading();
+                    that.updatePreviewHtml();
+                    that.hideLoading();
+                    location.href = location.href.replace('#/edit', '#/preview')
+                } 
+            }, 500);
+            
+           
             //console.log(msg)
         },
 
@@ -421,30 +458,32 @@ module.exports = {
          * @returns {*}
          */
         checkQuestion: function (question) {
-            var errorMsg = '第' + question.orderBy + '题请补充：'
-            var errorArr = []
+            var errorMsg = '第' + question.orderBy + '题请补充：';
+            var errorArr = [];
             if (question.qtypeInner == null) {
-                errorArr.push('题目类型')
+                errorArr.push('题目类型');
             }
             if (question.qtypeInner == 1 || question.qtypeInner == 2) {
                 if (!question.answerCount) {
-                    errorArr.push('选项个数')
+                    errorArr.push('选项个数');
                 }
-
             }
             if ((question.qtypeInner == 1 || question.qtypeInner == 2) && !question.answer) {
-                errorArr.push('答案')
+                errorArr.push('答案');
             }
             if (!question.difficulty) {
-                errorArr.push('难度')
+                errorArr.push('难度');
             }
             if (!question.knpList || !question.knpList.length) {
-                errorArr.push('知识点')
+                errorArr.push('知识点');
+            }
+            if (this.isShowMarks && !question.score && question.score == 0){
+                errorArr.push('分数(分数不能为“0”或为空)');
             }
             if (errorArr.join('、')) {
-                return errorMsg + errorArr.join('、')
+                return errorMsg + errorArr.join('、');
             } else {
-                return ''
+                return '';
             }
         },
 
@@ -621,14 +660,24 @@ module.exports = {
         },
         totalMark(){
             var mark = 0
-            this.$store.commit('SET_SCROLL_TOP');
-            this.qListForRender.forEach(function (v) {
+            var that = this;
+            that.$store.commit('SET_SCROLL_TOP');
+            that.qListForRender.forEach(function (v) {
                 mark = mark + v.score
             })
             
-            if (this.isShowMarks) {
+            if (that.isShowMarks) {
+                if(!that.first){
+                    that.$store.dispatch('MODIFY_IS_SHOW_SCORE', 1);
+                }
                 return mark
             } else {
+                if(!that.first){
+                    that.$store.dispatch('MODIFY_IS_SHOW_SCORE', 0);
+                    that.qListForRender.forEach(function (v) {
+                        v.score =0;
+                    })
+                }
                 return ''
 
             }
@@ -637,7 +686,9 @@ module.exports = {
             return this.$store.state.scrollTop;
         }
     },
-    watch: {},
+    watch: {
+
+    },
     components: {
         'edit-layer': editLayer,
         'loading-layer': loadingLayer,

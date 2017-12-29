@@ -51,7 +51,9 @@ const store = new Vuex.Store({
         downloadLink:'',
         addModel:{},
         knpList:[],
-        scrollTop:0
+        scrollTop:0,
+        // isShowScore:0,
+        // isShowMarks: ''
     },
     actions: {
         /**
@@ -67,6 +69,7 @@ const store = new Vuex.Store({
                 var json = JSON.parse(data);
                 console.log('book info:',json)
                 commit('SET_BOOK_INFO', { bookInfo: json.bizData.data})
+                // alert(this.isShowScroe)
             })
         },
         /**
@@ -270,8 +273,23 @@ const store = new Vuex.Store({
                 console.log(data);
                 dispatch('GET_BOOK_INFO',{id:state.currentBookId})
             })
+        },
+        MODIFY_IS_SHOW_SCORE: function(_ref15, isShowScore) {
+            var commit = _ref15.commit,
+                state = _ref15.state,
+                dispatch = _ref15.dispatch;
+
+            var params = {
+                'schoolworkId': state.currentBookId, //作业本id
+                "isShowScore": isShowScore
+            };
+            ajax.modifyIsShowScore(params).done(function (data) {
+                var json = JSON.parse(data);
+                console.log('MODIFY_IS_SHOW_SCORE:', json);
+            });
         }
     },
+    
     mutations: {
         SET_BOOK_ID:(state, { bookId }) => {
             state.currentBookId = bookId
@@ -281,7 +299,8 @@ const store = new Vuex.Store({
         SET_BOOK_INFO:(state, { bookInfo }) => {
             state.bookInfo = bookInfo
             state.knpFilter.grade = bookInfo.grade
-            state.knpFilter.subject = bookInfo.subject
+            state.knpFilter.subject = bookInfo.subject           
+            state.isShowScore = bookInfo.isShowScroe //0为没有选中，1为选中
         },
         SET_ERROR_QUESTIONS:(state, { eList }) => {
             state.eList = eList
